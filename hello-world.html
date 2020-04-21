@@ -1,34 +1,30 @@
-extends partial/layout
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Jimi"><title>Hello World-从WordPress转移到Hexo · Jimi's Blog</title><meta name="description" content="很久以前就想搭建自己的博客，正巧在校的课程涉及到C，Linux以及网络通信，刚装上Ubuntu不久就买了一台自己的VPS，兴冲冲地ssh上去开始折腾。搭建之前的Blog选择的是DigitalOcean每月五美元的VPS，详细参数：
 
-include mixins
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || strip_html(page.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 150);
-    meta(name="description", content=desc)
-
-block content
-  .autopagerize_page_element: .content: .post-page
-    include mixins
-    +make_post(page, true)
-    .share
-      .evernote
-        a.fa.fa-bookmark(href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);}})();", ref="nofollow", target="_blank")
-      .weibo
-        a.fa.fa-weibo(href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));")
-      .twitter
-        a.fa.fa-twitter(href=url_for("http://twitter.com/home?status="+","+config.url+"/"+page.path+","+config.title+","+page.title+",;"))
-    - var prev = page.prev ? page.prev.path : false;
-    - var next = page.next ? page.next.path : false;
-    .pagination
-      ul.clearfix
-        if prev
-          li.pre.pagbuttons
-            a.btn(role="navigation",href=url_for(prev), title=page.prev.title)!= __('prev_post')
-        if next
-          li.next.pagbuttons
-            a.btn(role="navigation",href=url_for(next), title=page.next.title)!= __('next_post')
-    if page.comments
-        include partial/comments
+Memory: 1GB
+vCPUs: 1vCPU
+SSD Disk"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Jimi's Blog</a></h3><div class="description"><p>Things I made and things I love.</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me" target="_blank" rel="noopener"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Hello World-从WordPress转移到Hexo</a></h3></div><div class="post-content"><p>很久以前就想搭建自己的博客，正巧在校的课程涉及到C，Linux以及网络通信，刚装上Ubuntu不久就买了一台自己的VPS，兴冲冲地ssh上去开始折腾。搭建之前的Blog选择的是<a href="https://digitalocean.com" target="_blank" rel="noopener">DigitalOcean</a>每月五美元的VPS，详细参数：</p>
+<ul>
+<li>Memory: <strong>1GB</strong></li>
+<li>vCPUs: <strong>1vCPU</strong></li>
+<li>SSD Disk: <strong>25GB</strong></li>
+<li>Trasnfer: <strong>1TB</strong></li>
+<li>Price: <strong>5 dollar/month</strong></li>
+</ul>
+<p>VPS使用<a href="https://www.centos.org/" target="_blank" rel="noopener">CenetOS</a> 6系统，安装了LMNP以及宝塔面板（当然还有ssr方便在国内折腾和上油管），搭建WordPress博客系统，使用Let’s Encrypt提供的证书开启了HTTPS，安装了一系列加速插件，并且尝试了SEO优化等等。</p>
+<p>其实当时在VPS的博客搭建效果还算不错，个人的VPS也有不少有点，比如：</p>
+<ul>
+<li>Full Control. 既然是你买的VPS，想用 什么结构，选择什么软件版本，都是可以自己决定的，相对托管型博客自由度较大，如果你是HTML/CSS/PHP大神，想必用VPS做一个小小的博客不在话下。</li>
+<li>Write anywhere, any platform. 使用WP搭建的博客，只要能用浏览器登陆后台便可以写作，不存在类似<a href="hexo.io">Hexo</a>那样需要搭建配置Git环境的情况，节省写作成本和时间，让你可以更加专心于写作。</li>
+<li>Modification take effects instantly. 发布或者修改文章后，由于资源都存储在VPS中，刷新页面立刻就能看到新的改动。</li>
+<li>Other Features. 例如可以搭梯子，用VPS跑微信机器人实现自动回复，或是使用例如KodExploer搭建个人云盘，存一些小电影和奇怪的种子文件。</li>
+</ul>
+<p>当然选择VPS也是有缺点的：</p>
+<ul>
+<li>Monthly Expense. 各大服务商一般最便宜的VPS也需要5美元一个月，对于还没有收入的学生党还是一笔开销。</li>
+<li>只需要一个博客用来记录，而对于VPS的其他功能没有刚需的朋友，购买VPS则显得略有多余，考虑选择比如<a href="www.jianshu.com">简书</a>一类支持Markdown写作的网站博客。</li>
+<li>购买VPS/购买域名/学习CentOS or Ubuntu各种命令/搭建LMNP/配置DNS/配置HTTPS…等等，学习成本过高。</li>
+<li>某天服务器折腾挂了，又没有备份，此时你的博客和文章就gg了，又得花大量时间去研究抢救你的博客。</li>
+</ul>
+<h4 id="所以，我选择了Hexo"><a href="#所以，我选择了Hexo" class="headerlink" title="所以，我选择了Hexo"></a><a href="#所以，我选择了Hexo" title="所以，我选择了Hexo"></a>所以，我选择了Hexo</h4><p>（To be continued…）</p>
+<p><em>这是第一次用Markdown写Blog， 对于语法还不熟悉，需要慢慢学习。</em></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-09-28</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://jimizhou.xyz/hello-world.html,Jimi' target="_blank" rel="noopener"s Blog,Hello World-从WordPress转移到Hexo,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/SMERGY.html" title="SMERGY Smart Pedal">上一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

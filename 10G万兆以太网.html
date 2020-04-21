@@ -1,34 +1,61 @@
-extends partial/layout
-
-include mixins
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || strip_html(page.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 150);
-    meta(name="description", content=desc)
-
-block content
-  .autopagerize_page_element: .content: .post-page
-    include mixins
-    +make_post(page, true)
-    .share
-      .evernote
-        a.fa.fa-bookmark(href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);}})();", ref="nofollow", target="_blank")
-      .weibo
-        a.fa.fa-weibo(href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));")
-      .twitter
-        a.fa.fa-twitter(href=url_for("http://twitter.com/home?status="+","+config.url+"/"+page.path+","+config.title+","+page.title+",;"))
-    - var prev = page.prev ? page.prev.path : false;
-    - var next = page.next ? page.next.path : false;
-    .pagination
-      ul.clearfix
-        if prev
-          li.pre.pagbuttons
-            a.btn(role="navigation",href=url_for(prev), title=page.prev.title)!= __('prev_post')
-        if next
-          li.next.pagbuttons
-            a.btn(role="navigation",href=url_for(next), title=page.next.title)!= __('next_post')
-    if page.comments
-        include partial/comments
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Jimi"><title>10G万兆以太网 · Jimi's Blog</title><meta name="description" content="万兆（10G）以太网基本特征
+保留802.3以太网的帧格式
+保留802.3以太网的最大帧长和最小帧长
+只使用全双工工作方式，完全改变了传统以太网的半双工的广播工作方式
+只使用光纤作为传输媒体而不使用铜线
+使用点对点链路，支持星形结构的局域网
+10G以太网数据率非常高，不直接和端用户相连
+创造了新的光"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Jimi's Blog</a></h3><div class="description"><p>Things I made and things I love.</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me" target="_blank" rel="noopener"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>10G万兆以太网</a></h3></div><div class="post-content"><h3 id="万兆（10G）以太网基本特征"><a href="#万兆（10G）以太网基本特征" class="headerlink" title="万兆（10G）以太网基本特征"></a>万兆（10G）以太网基本特征</h3><ul>
+<li>保留802.3以太网的帧格式</li>
+<li>保留802.3以太网的最大帧长和最小帧长</li>
+<li>只使用全双工工作方式，完全改变了传统以太网的半双工的广播工作方式</li>
+<li>只使用光纤作为传输媒体而不使用铜线</li>
+<li>使用点对点链路，支持星形结构的局域网</li>
+<li>10G以太网数据率非常高，不直接和端用户相连</li>
+<li>创造了新的光物理媒体相关(PMD)子层</li>
+<li>10G以太网的工作距离已经增大到40km<h3 id="万兆（10G）以太网OSI参考模型"><a href="#万兆（10G）以太网OSI参考模型" class="headerlink" title="万兆（10G）以太网OSI参考模型"></a>万兆（10G）以太网OSI参考模型</h3>在国际标准组织开放式系统互联（OSI）参考模型下，以太网是第二层协议。万兆以太网使用IEEE 802.3以太网介质访问控制协议（MAC）、IEEE 802.3以太网帧格式以及IEEE 802.3最小和最大帧尺寸。</li>
+</ul>
+<p>正如1000Base-X和1000Base-T（千兆以太网）都属于以太网一样，从速度和连接距离上来说，万兆以太网是以太网技术自然发展中的一个阶段。但是，因为它是一种只适用于全双工模式，并且只能使用光纤的技术，所以它不需要带有冲突检测的载波侦听多路访问协议（CSMA/CD）。除此之外，万兆以太网与原来的以太网模型完全相同。</p>
+<p>在以太网中，PHY表示以太网的物理层设备，它对应于OSI模型的第一层。PHY通过连接介质（光纤或铜线）与MAC层相连，而MAC层对应的是OSI模型中的第二层。在以太网的体系结构中，PHY（第一层）进一步划分为物理介质层（PMD）和物理编码子层（PCS）。例如，光纤收发机属于PMD，PCS由编码器和一个并串转换器或复用功能组成。</p>
+<p><img src="https://i.loli.net/2020/04/20/N7UgiTVvdMAy4fh.png" alt="10G-Layer.png"></p>
+<h3 id="万兆（10G）以太网MAC层帧结构"><a href="#万兆（10G）以太网MAC层帧结构" class="headerlink" title="万兆（10G）以太网MAC层帧结构"></a>万兆（10G）以太网MAC层帧结构</h3><p><img src="https://i.loli.net/2020/04/20/TbnUfejRtYNpia3.png" alt="mac.png"></p>
+<h3 id="万兆（10G）以太网物理层"><a href="#万兆（10G）以太网物理层" class="headerlink" title="万兆（10G）以太网物理层"></a>万兆（10G）以太网物理层</h3><p>万兆（10G）以太网有两种不同的物理层：</p>
+<ol>
+<li>局域网物理层</li>
+<li>广域网物理层(可选)</li>
+</ol>
+<p><img src="https://i.loli.net/2020/04/20/PMKBe7jbcCJD1Im.png" alt="10G-phy.png"></p>
+<ul>
+<li>10G媒体无关接口(XGMII，这里的“x”在罗马数字中表示10)用来使10G以太网下面不同的几个物理层对上面的MAC子层透明。在 IEEE 802.3ae标准中定义的XGMII由4个并行的数据通道组成，每个通道宽度为一个字节，其数据速率为312.5 Mbit/s(时钟频率为156.25MHz ±0.01%, 时钟上下沿工作)，因此总的数据速率为4×8×312.5=10000Mbit/s，正好是10Gbit/s</li>
+<li>物理编码子层(PCS)是802.3ae物理层的一个子层，用来对数据进行编码(在发送数据时)和解码(当接收数据时)。</li>
+<li>物理媒体连接(PMA)子层是802.3ae物理层的一个子层，向PCS子层提供与媒体无关的方法，以支持使用面向串行比特的物理媒体。</li>
+<li>物理媒体相关(PMD)子层是802.3ae物理层的一个子层，定义物理层信令和媒体相关接口(MDI)，以及所支持的媒体类型。需要指出的是，PMD子层是光信号子层，其主要功能是进行光信号的发送和接收。而PMD以上的各层都是使用电信号。</li>
+<li>广域网接口子层(WIS)是802.3ae物理层的一个子层，仅在广域网物理层中使用，它处在PCS子层和PMA子层之间。广域网接口子层的作用就是进行SONET/SDH组帧。</li>
+<li>媒体相关接口(MDI)用来将PMD子层和物理层的光缆相连接。</li>
+</ul>
+<h3 id="万兆（10G）以太网WIS物理层"><a href="#万兆（10G）以太网WIS物理层" class="headerlink" title="万兆（10G）以太网WIS物理层"></a>万兆（10G）以太网WIS物理层</h3><p><img src="https://i.loli.net/2020/04/20/szpdXuh7bMoYxJm.png" alt="wis.png"></p>
+<h3 id="万兆（10G）以太网PCS与XGMII"><a href="#万兆（10G）以太网PCS与XGMII" class="headerlink" title="万兆（10G）以太网PCS与XGMII"></a>万兆（10G）以太网PCS与XGMII</h3><p><img src="https://i.loli.net/2020/04/20/kOBNoYLmJT8fahQ.png" alt="pcs-xgmii.png"></p>
+<h3 id="万兆（10G）以太网64B-66B编码"><a href="#万兆（10G）以太网64B-66B编码" class="headerlink" title="万兆（10G）以太网64B/66B编码"></a>万兆（10G）以太网64B/66B编码</h3><ul>
+<li>一种为10G以太网开发的新型线路编码机制，它使用了带有非扰码同步字符和控制字符的扰码方式。</li>
+<li>不同于8b/10b的查找表方式，64b/66b使用了带有非扰码同步字符和控制字符的扰码方式。</li>
+<li>对齐方式每66位中都会有01或10的同步比特。在比特流的其他地方也会出现这样的比特组合。对齐程序首先随机选择一个起点。它首先搜寻有效的同步（01或者10组合），如果没有找到，则移动一位然后重新检测。一旦找到01或者10组合，则检查后续的66个比特。如果后续比特中包含一个有效同步符号，则计数器增1，然后继续检测后面的66个比特。如果在一行中能够连续检测到足够多的同步符号，而且没有发生错误，则确定对齐。如果检测过程中出现任何错误，则计数器清零。</li>
+<li>低开销的代价是更长的对齐时间、出现轻微直流偏置的可能性和更加复杂的编码器和解码器。很多复杂处理使得64b/66b的电路比它们的近亲8b/10b要复杂的多，例如启用或者关闭有效载荷的扰码器就是很复杂的过程。解码器启用和使用也更加复杂了。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/04/20/4Wk1MntVoHbhREa.png" alt="64B.png"></p>
+<p>主帧的数据主要有两种。简单的主帧包括两位同步比特01以及64为的数据，数据经过扰码处理，但是同步比特则不进行扰码处理。另一种主帧既可以是数据也可以是控制信息。控制帧的前两位是同步比特10，类型域的8比特定义其余56为有效载荷的形式，距离说明，如果类型是十六进制0xcc，则该帧包含4个字节的数据和3个字节的控制信息。</p>
+<p><img src="https://i.loli.net/2020/04/20/hXtV31726a4jxIF.png" alt="0xcc.png"></p>
+<p><img src="https://i.loli.net/2020/04/20/UVxdrv3sEfacwep.png" alt="10G-64B.png"></p>
+<h3 id="万兆（10G）以太网XGMII接口"><a href="#万兆（10G）以太网XGMII接口" class="headerlink" title="万兆（10G）以太网XGMII接口"></a>万兆（10G）以太网XGMII接口</h3><p><img src="https://i.loli.net/2020/04/20/AzyGpvdnexmlCHo.png" alt="XGMII.png"></p>
+<h3 id="万兆（10G）以太网光纤媒介命名"><a href="#万兆（10G）以太网光纤媒介命名" class="headerlink" title="万兆（10G）以太网光纤媒介命名"></a>万兆（10G）以太网光纤媒介命名</h3><ul>
+<li>10G以太网采多种光纤媒介。光纤媒介的型号具体表示方法为：10GBASE-[媒介类型][编码方案][波长数]，或更加具体：10GBASE-[E/L/S][R/W/X][4]。</li>
+<li>在媒介类型中S为短波长(850nm)，用于多模光纤在短距离(约为35m)传送数据；</li>
+<li>L为长波长(1310nm)，用于在校园网的建筑物之间或大厦的楼层间进行数据传输，当使用单模光纤时可支持10 km 的传输距离，而在使用多模光纤时，传输距离为300m；</li>
+<li>E为特长波长(1550nm)，用于广域网或城域网中的数据传送，当使用1550nm波长的单模光纤时，传输距离可达40km。</li>
+<li>在编码方案中，X为局域网物理层中的8B/1OB编码，R为局域网物理层中的64B/66B编码，W为广域网物理层中的64B/66B编码(简化的SONET/SDH封装)。</li>
+<li>最后的波长数可以为4，使用的是宽波分复用(WWDM)。在进行短距离传输时，WWDM要比密集波分复用(DWDM)便宜得多。如果不使用波分复用，则波长数就是1，并且可将其省略。</li>
+</ul>
+<p><img src="https://i.loli.net/2020/04/20/C1T8jOmYExzMWJA.png" alt="fiber.png"></p>
+<blockquote>
+<p>来源：<a href="http://www.witimes.com/10g-ethernet-introduction/" target="_blank" rel="noopener">万兆（10G）以太网简介</a></p>
+</blockquote>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-04-20</span><i class="fa fa-tag"></i><a class="tag" href="/categories/Tech-stuff/" title="Tech stuff">Tech stuff </a><a class="tag" href="/categories/Tech-stuff/Server/" title="Server">Server </a><a class="tag" href="/tags/Note/" title="Note">Note </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://jimizhou.xyz/10G万兆以太网.html,Jimi' target="_blank" rel="noopener"s Blog,10G万兆以太网,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="next pagbuttons"><a class="btn" role="navigation" href="/20200326.html" title="20200326">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

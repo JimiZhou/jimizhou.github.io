@@ -1,0 +1,418 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Jimi&#39;s Blog</title>
+  
+  <subtitle>There&#39;s no place like 127.0.0.1</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://jimizhou.xyz/"/>
+  <updated>2020-04-21T05:42:20.185Z</updated>
+  <id>http://jimizhou.xyz/</id>
+  
+  <author>
+    <name>Jimi</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>10G万兆以太网</title>
+    <link href="http://jimizhou.xyz/10G%E4%B8%87%E5%85%86%E4%BB%A5%E5%A4%AA%E7%BD%91.html"/>
+    <id>http://jimizhou.xyz/10G%E4%B8%87%E5%85%86%E4%BB%A5%E5%A4%AA%E7%BD%91.html</id>
+    <published>2020-04-20T08:22:16.000Z</published>
+    <updated>2020-04-21T05:42:20.185Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="万兆（10G）以太网基本特征"><a href="#万兆（10G）以太网基本特征" class="headerlink" title="万兆（10G）以太网基本特征"></a>万兆（10G）以太网基本特征</h3><ul><li>保留802.3以太网的帧格式</li><li>保留802.3以太网的最大帧长和最小帧长</li><li>只使用全双工工作方式，完全改变了传统以太网的半双工的广播工作方式</li><li>只使用光纤作为传输媒体而不使用铜线</li><li>使用点对点链路，支持星形结构的局域网</li><li>10G以太网数据率非常高，不直接和端用户相连</li><li>创造了新的光物理媒体相关(PMD)子层</li><li>10G以太网的工作距离已经增大到40km<h3 id="万兆（10G）以太网OSI参考模型"><a href="#万兆（10G）以太网OSI参考模型" class="headerlink" title="万兆（10G）以太网OSI参考模型"></a>万兆（10G）以太网OSI参考模型</h3>在国际标准组织开放式系统互联（OSI）参考模型下，以太网是第二层协议。万兆以太网使用IEEE 802.3以太网介质访问控制协议（MAC）、IEEE 802.3以太网帧格式以及IEEE 802.3最小和最大帧尺寸。</li></ul><p>正如1000Base-X和1000Base-T（千兆以太网）都属于以太网一样，从速度和连接距离上来说，万兆以太网是以太网技术自然发展中的一个阶段。但是，因为它是一种只适用于全双工模式，并且只能使用光纤的技术，所以它不需要带有冲突检测的载波侦听多路访问协议（CSMA/CD）。除此之外，万兆以太网与原来的以太网模型完全相同。</p><p>在以太网中，PHY表示以太网的物理层设备，它对应于OSI模型的第一层。PHY通过连接介质（光纤或铜线）与MAC层相连，而MAC层对应的是OSI模型中的第二层。在以太网的体系结构中，PHY（第一层）进一步划分为物理介质层（PMD）和物理编码子层（PCS）。例如，光纤收发机属于PMD，PCS由编码器和一个并串转换器或复用功能组成。</p><p><img src="https://i.loli.net/2020/04/20/N7UgiTVvdMAy4fh.png" alt="10G-Layer.png"></p><h3 id="万兆（10G）以太网MAC层帧结构"><a href="#万兆（10G）以太网MAC层帧结构" class="headerlink" title="万兆（10G）以太网MAC层帧结构"></a>万兆（10G）以太网MAC层帧结构</h3><p><img src="https://i.loli.net/2020/04/20/TbnUfejRtYNpia3.png" alt="mac.png"></p><h3 id="万兆（10G）以太网物理层"><a href="#万兆（10G）以太网物理层" class="headerlink" title="万兆（10G）以太网物理层"></a>万兆（10G）以太网物理层</h3><p>万兆（10G）以太网有两种不同的物理层：</p><ol><li>局域网物理层</li><li>广域网物理层(可选)</li></ol><p><img src="https://i.loli.net/2020/04/20/PMKBe7jbcCJD1Im.png" alt="10G-phy.png"></p><ul><li>10G媒体无关接口(XGMII，这里的“x”在罗马数字中表示10)用来使10G以太网下面不同的几个物理层对上面的MAC子层透明。在 IEEE 802.3ae标准中定义的XGMII由4个并行的数据通道组成，每个通道宽度为一个字节，其数据速率为312.5 Mbit/s(时钟频率为156.25MHz ±0.01%, 时钟上下沿工作)，因此总的数据速率为4×8×312.5=10000Mbit/s，正好是10Gbit/s</li><li>物理编码子层(PCS)是802.3ae物理层的一个子层，用来对数据进行编码(在发送数据时)和解码(当接收数据时)。</li><li>物理媒体连接(PMA)子层是802.3ae物理层的一个子层，向PCS子层提供与媒体无关的方法，以支持使用面向串行比特的物理媒体。</li><li>物理媒体相关(PMD)子层是802.3ae物理层的一个子层，定义物理层信令和媒体相关接口(MDI)，以及所支持的媒体类型。需要指出的是，PMD子层是光信号子层，其主要功能是进行光信号的发送和接收。而PMD以上的各层都是使用电信号。</li><li>广域网接口子层(WIS)是802.3ae物理层的一个子层，仅在广域网物理层中使用，它处在PCS子层和PMA子层之间。广域网接口子层的作用就是进行SONET/SDH组帧。</li><li>媒体相关接口(MDI)用来将PMD子层和物理层的光缆相连接。</li></ul><h3 id="万兆（10G）以太网WIS物理层"><a href="#万兆（10G）以太网WIS物理层" class="headerlink" title="万兆（10G）以太网WIS物理层"></a>万兆（10G）以太网WIS物理层</h3><p><img src="https://i.loli.net/2020/04/20/szpdXuh7bMoYxJm.png" alt="wis.png"></p><h3 id="万兆（10G）以太网PCS与XGMII"><a href="#万兆（10G）以太网PCS与XGMII" class="headerlink" title="万兆（10G）以太网PCS与XGMII"></a>万兆（10G）以太网PCS与XGMII</h3><p><img src="https://i.loli.net/2020/04/20/kOBNoYLmJT8fahQ.png" alt="pcs-xgmii.png"></p><h3 id="万兆（10G）以太网64B-66B编码"><a href="#万兆（10G）以太网64B-66B编码" class="headerlink" title="万兆（10G）以太网64B/66B编码"></a>万兆（10G）以太网64B/66B编码</h3><ul><li>一种为10G以太网开发的新型线路编码机制，它使用了带有非扰码同步字符和控制字符的扰码方式。</li><li>不同于8b/10b的查找表方式，64b/66b使用了带有非扰码同步字符和控制字符的扰码方式。</li><li>对齐方式每66位中都会有01或10的同步比特。在比特流的其他地方也会出现这样的比特组合。对齐程序首先随机选择一个起点。它首先搜寻有效的同步（01或者10组合），如果没有找到，则移动一位然后重新检测。一旦找到01或者10组合，则检查后续的66个比特。如果后续比特中包含一个有效同步符号，则计数器增1，然后继续检测后面的66个比特。如果在一行中能够连续检测到足够多的同步符号，而且没有发生错误，则确定对齐。如果检测过程中出现任何错误，则计数器清零。</li><li>低开销的代价是更长的对齐时间、出现轻微直流偏置的可能性和更加复杂的编码器和解码器。很多复杂处理使得64b/66b的电路比它们的近亲8b/10b要复杂的多，例如启用或者关闭有效载荷的扰码器就是很复杂的过程。解码器启用和使用也更加复杂了。</li></ul><p><img src="https://i.loli.net/2020/04/20/4Wk1MntVoHbhREa.png" alt="64B.png"></p><p>主帧的数据主要有两种。简单的主帧包括两位同步比特01以及64为的数据，数据经过扰码处理，但是同步比特则不进行扰码处理。另一种主帧既可以是数据也可以是控制信息。控制帧的前两位是同步比特10，类型域的8比特定义其余56为有效载荷的形式，距离说明，如果类型是十六进制0xcc，则该帧包含4个字节的数据和3个字节的控制信息。</p><p><img src="https://i.loli.net/2020/04/20/hXtV31726a4jxIF.png" alt="0xcc.png"></p><p><img src="https://i.loli.net/2020/04/20/UVxdrv3sEfacwep.png" alt="10G-64B.png"></p><h3 id="万兆（10G）以太网XGMII接口"><a href="#万兆（10G）以太网XGMII接口" class="headerlink" title="万兆（10G）以太网XGMII接口"></a>万兆（10G）以太网XGMII接口</h3><p><img src="https://i.loli.net/2020/04/20/AzyGpvdnexmlCHo.png" alt="XGMII.png"></p><h3 id="万兆（10G）以太网光纤媒介命名"><a href="#万兆（10G）以太网光纤媒介命名" class="headerlink" title="万兆（10G）以太网光纤媒介命名"></a>万兆（10G）以太网光纤媒介命名</h3><ul><li>10G以太网采多种光纤媒介。光纤媒介的型号具体表示方法为：10GBASE-[媒介类型][编码方案][波长数]，或更加具体：10GBASE-[E/L/S][R/W/X][4]。</li><li>在媒介类型中S为短波长(850nm)，用于多模光纤在短距离(约为35m)传送数据；</li><li>L为长波长(1310nm)，用于在校园网的建筑物之间或大厦的楼层间进行数据传输，当使用单模光纤时可支持10 km 的传输距离，而在使用多模光纤时，传输距离为300m；</li><li>E为特长波长(1550nm)，用于广域网或城域网中的数据传送，当使用1550nm波长的单模光纤时，传输距离可达40km。</li><li>在编码方案中，X为局域网物理层中的8B/1OB编码，R为局域网物理层中的64B/66B编码，W为广域网物理层中的64B/66B编码(简化的SONET/SDH封装)。</li><li>最后的波长数可以为4，使用的是宽波分复用(WWDM)。在进行短距离传输时，WWDM要比密集波分复用(DWDM)便宜得多。如果不使用波分复用，则波长数就是1，并且可将其省略。</li></ul><p><img src="https://i.loli.net/2020/04/20/C1T8jOmYExzMWJA.png" alt="fiber.png"></p><blockquote><p>来源：<a href="http://www.witimes.com/10g-ethernet-introduction/" target="_blank" rel="noopener">万兆（10G）以太网简介</a></p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;万兆（10G）以太网基本特征&quot;&gt;&lt;a href=&quot;#万兆（10G）以太网基本特征&quot; class=&quot;headerlink&quot; title=&quot;万兆（10G）以太网基本特征&quot;&gt;&lt;/a&gt;万兆（10G）以太网基本特征&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;保留802.3以太网的帧格式&lt;/
+      
+    
+    </summary>
+    
+    
+      <category term="Tech stuff" scheme="http://jimizhou.xyz/categories/Tech-stuff/"/>
+    
+      <category term="Server" scheme="http://jimizhou.xyz/categories/Tech-stuff/Server/"/>
+    
+    
+      <category term="Note" scheme="http://jimizhou.xyz/tags/Note/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>20200326</title>
+    <link href="http://jimizhou.xyz/20200326.html"/>
+    <id>http://jimizhou.xyz/20200326.html</id>
+    <published>2020-03-26T02:33:35.000Z</published>
+    <updated>2020-04-21T05:41:59.636Z</updated>
+    
+    <content type="html"><![CDATA[<p>考虑到安全因素，今天把OneDrive整个扒下来转移到自建的群晖Drive中，本地移动硬盘再存一份，保证数据安全。</p><p><img src="/images/2020/03/26/d19393c0-6f09-11ea-b983-019327b9e3a1.png" alt="image.png"></p><p>OneDrive这个速度…挂了代理也还是只有1MB/s，太惨了。群晖这边用了Zerotier穿透，中间是用TX云的小vps做的MOON节点，等OneDrive同步完了上传群晖的时候测一下点对点速度。</p><p>0402 Update: 瓶颈在TX云1M带宽上，同步速度在100Kb/s左右…于是改用Quick Connect，速度能有400-500Kb/s，用来备份工作资料等够用了。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;考虑到安全因素，今天把OneDrive整个扒下来转移到自建的群晖Drive中，本地移动硬盘再存一份，保证数据安全。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2020/03/26/d19393c0-6f09-11ea-b983-019327b9e3a1.png&quot; a
+      
+    
+    </summary>
+    
+    
+      <category term="日常" scheme="http://jimizhou.xyz/categories/%E6%97%A5%E5%B8%B8/"/>
+    
+    
+      <category term="OneDrive" scheme="http://jimizhou.xyz/tags/OneDrive/"/>
+    
+      <category term="Synology" scheme="http://jimizhou.xyz/tags/Synology/"/>
+    
+      <category term="Drive" scheme="http://jimizhou.xyz/tags/Drive/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SDN-Software Defined Network</title>
+    <link href="http://jimizhou.xyz/SDN-Software-Defined-Network.html"/>
+    <id>http://jimizhou.xyz/SDN-Software-Defined-Network.html</id>
+    <published>2020-03-18T06:03:02.000Z</published>
+    <updated>2020-03-23T10:00:02.724Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Software-Defined-Network"><a href="#Software-Defined-Network" class="headerlink" title="Software Defined Network"></a>Software Defined Network</h1><p>软件定义网络（Software Defined Network, SDN ），是由美国斯坦福大学clean slate研究组提出的一种新型网络创新架构，核心理念是，希望应用软件可以参与对网络的控制管理，满足上层业务需求，通过自动化业务部署简化网络运维。<br><img src="/images/2020/03/23/bbef7aa0-6cd1-11ea-ba8a-4bfcfac4c4f3.png" alt="image.png"><br>SDN三大特征：</p><ol><li>控制转发分离</li><li>网络虚拟化</li><li>可编程接口<br><img src="/images/2020/03/23/e238a0d0-6cd4-11ea-ba8a-4bfcfac4c4f3.png" alt="image.png"><h2 id="Open-vSwitch"><a href="#Open-vSwitch" class="headerlink" title="Open vSwitch"></a>Open vSwitch</h2>即OVS，虚拟交换机的一种</li></ol><ul><li>方便网络管理监控。方便管理员对整套云环境中的网络状态和数据流量进行监控，比如可以分析网络中流淌的数据包是来自哪个 VM、哪个 OS 及哪个用户，这些都可以借助 OVS 提供的工具来达到。</li><li>加速数据包寻路与转发。相比 Bridge 单纯的基于 MAC 地址学习的转发规则，OVS 引入流缓存的机制，可以加快数据包的转发效率。</li><li>基于SDN的控制面与数据面分离的思想。OVS 控制面负责流表的学习与下发，具体的转发动作则有数据面来完成。可扩展性强。</li><li>隧道协议支持。Bridge 只支持 VxLAN，OVS 支持 gre/vxlan/IPsec 等。</li><li>适用于 Xen、KVM、VirtualBox、VMware 等多种 Hypervisors。</li></ul><h3 id="OVS结构"><a href="#OVS结构" class="headerlink" title="OVS结构"></a>OVS结构</h3><p>::: hljs-center</p><p><img src="/images/2020/03/19/2b12bcb0-69a5-11ea-aeb8-dd811e2c01c4.png" alt="image.png"></p><p>:::<br>如图所示，OVS 在 Linux 用户态和内核态都实现了相应的模块，用户态主要组件有数据库服务 ovsdb-server 和守护进程 ovs-vswitchd。内核态中实现了 datapath 模块。其中， ovs-vswitchd 和 datapath 共同构成了 OVS 的数据面，控制面由 controller 模块来完成，controller 一般表示的是 <strong>OpenFlow</strong>控制器，在 OVS 中，它可以借由第三方来完成，只要支持<strong>OpenFlow</strong>协议即可。</p><h3 id="OpenFlow"><a href="#OpenFlow" class="headerlink" title="OpenFlow"></a>OpenFlow</h3><p>OpenFlow 是控制面和数据面通信的一套协议，我们常常把支持 OpenFlow 协议的交换机称为 OpenFlow 交换机，控制器称为 OpenFlow 控制器，业界比较知名的 OpenFlow 控制器有 OpenDaylight、ONOS 等。</p><p>OpenFlow 是一个独立的完整的流表协议，不依赖于 OVS，OVS 只是支持 OpenFlow 协议，有了支持，就可以使用 OpenFlow 控制器来管理 OVS 中的流表。OpenFlow 不仅仅支持虚拟交换机，某些硬件交换机也支持 OpenFlow 协议。</p><h3 id="ovs-vswitchd"><a href="#ovs-vswitchd" class="headerlink" title="ovs-vswitchd"></a>ovs-vswitchd</h3><p>ovs-vswitchd 是 OVS 的核心组件，它和内核模块 datapath 共同构成了 OVS 的数据面。它使用 OpenFlow 协议与 OpenFlow 控制器通信，使用 OVSDB 协议与 ovsdb-server 通信，使用 netlink 和 datapath 内核模块通信。</p><h3 id="ovsdb-server"><a href="#ovsdb-server" class="headerlink" title="ovsdb-server"></a>ovsdb-server</h3><p>ovsdb-server 是 OVS 轻量级的数据库服务，用于整个 OVS 的配置信息，包括接口、交换内容、VLAN 等，ovs-vswitchd 根据这些配置信息工作。</p><h3 id="OpenFlow-控制器"><a href="#OpenFlow-控制器" class="headerlink" title="OpenFlow 控制器"></a>OpenFlow 控制器</h3><p>OpenFlow 控制器可以通过 OpenFlow 协议连接到任何支持 OpenFlow 的交换机，比如 OVS 。控制器通过向交换机下发流表规则来控制数据流向。</p><h3 id="Kernel-Datapath"><a href="#Kernel-Datapath" class="headerlink" title="Kernel Datapath"></a>Kernel Datapath</h3><p>datapath 内核模块和 ovs-vswitchd 是相互协作工作的，datapath 负责具体的收发包，而 ovs-vswitchd 通过 controller 下发的流表规则指导 datapath 如何转发包。</p><p>举个例子，datapath 从主机物理网卡 NIC 或者 VM 的 虚拟网卡 vNIC 收到包，如果是第一次收到包，datapath 不知道怎么处理这个包，于是将其丢给 ovs-vswitchd ， ovs-vswitchd 决定该如何处理这个包之后又丢给 datapath，datapath 根据 ovs-vswitchd 的指示执行相应的动作，是丢弃还是从哪个口传出去。同时，ovs-vswitchd 会让 datapath 缓存好这个包的动作，下次再来就可以直接执行动作。</p><p>如果不是第一次收到包，就是按照之前缓存好的动作执行，这样极大地提高了数据处理的速度。</p><h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.chinastor.com/network/sdn/102442P92019.html" target="_blank" rel="noopener">一文看懂SDN软件定义网络，概念、原理、架构及实现各环节介绍</a><br><a href="https://www.cnblogs.com/bakari/p/8097439.html" target="_blank" rel="noopener">从 Bridge 到 OVS，探索虚拟交换机</a><br><a href="http://www.muzixing.com/pages/2015/06/22/chu-xue-zhe-de-sdnxue-xi-zhi-lu.html" target="_blank" rel="noopener">初学者的SDN学习之路</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Software-Defined-Network&quot;&gt;&lt;a href=&quot;#Software-Defined-Network&quot; class=&quot;headerlink&quot; title=&quot;Software Defined Network&quot;&gt;&lt;/a&gt;Software Defin
+      
+    
+    </summary>
+    
+    
+      <category term="Tech stuff" scheme="http://jimizhou.xyz/categories/Tech-stuff/"/>
+    
+    
+      <category term="SDN" scheme="http://jimizhou.xyz/tags/SDN/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>20200318-Note</title>
+    <link href="http://jimizhou.xyz/20200318-Note.html"/>
+    <id>http://jimizhou.xyz/20200318-Note.html</id>
+    <published>2020-03-18T05:53:29.000Z</published>
+    <updated>2020-03-24T09:10:20.611Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>Failover 失效转移</strong><br>通俗地说，即当A无法为客户服务时，系统能够自动地切换，使B能够及时地顶上继续为客户提供服务，且客户感觉不到这个为他提供服务的对象已经更换。这里的A和B可以存在于各种领域，但一般fail-over特指计算机领域的数据库、应用服务、硬件设备等的失效转移。</p><p><strong>Failback 自动恢复</strong><br>在簇网络系统（有两台或多台服务器互联的网络）中，由于要某台服务器进行维修，需要网络资源和服务暂时重定向到备用系统。在此之后将网络资源和服务器恢复为由原始主机提供的过程，称为自动恢复。</p><p><strong>MTU</strong><br>Maximum Transmission Unit，最大传输单元，对数据帧长度的最大限制，如果数据分组长度大于这个数值，需要在IP层对其分片，任何超过MTU的数据块都会在传输前分成小的传输单元。MTU有两个测量层次：网络层和链路层。比如，网络层上标准的因特网MTU是1500bytes，而在连接层上是1518字节。没有特别说的时候，往往指的是网络层的MTU。</p><p>要增加一个网络接口 MTU 的常见原因是增加高速因特网的吞吐量。标准因特网 MTU 使用 1500byte是为了和 10M 和 100M 网络后向兼容，但是，在目前1G和 10G网络中远远不够。新式的网络设备可以处理更大的MTU，但是，MTU需要显式设置。这种更大MTU的帧叫做“巨帧”，通常 9000 byte 是比较普遍的。MTU 不能和目前任何 Internet 网络协议混在一起，但是，可以使用一个路由器将不同 MTU 的网段连在一起。</p><p><em>source:<a href="https://feisky.gitbooks.io/sdn/basic/tcpip.html" target="_blank" rel="noopener">TCP/IP模型</a></em></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;Failover 失效转移&lt;/strong&gt;&lt;br&gt;通俗地说，即当A无法为客户服务时，系统能够自动地切换，使B能够及时地顶上继续为客户提供服务，且客户感觉不到这个为他提供服务的对象已经更换。这里的A和B可以存在于各种领域，但一般fail-over特指计算机领
+      
+    
+    </summary>
+    
+    
+      <category term="Tech stuff" scheme="http://jimizhou.xyz/categories/Tech-stuff/"/>
+    
+    
+      <category term="Note" scheme="http://jimizhou.xyz/tags/Note/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>服务器市场-Ampere Altra ARM处理器以及服务器平台发布</title>
+    <link href="http://jimizhou.xyz/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%82%E5%9C%BA-Ampere-Altra-ARM%E5%A4%84%E7%90%86%E5%99%A8%E4%BB%A5%E5%8F%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B3%E5%8F%B0%E5%8F%91%E5%B8%83.html"/>
+    <id>http://jimizhou.xyz/%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B8%82%E5%9C%BA-Ampere-Altra-ARM%E5%A4%84%E7%90%86%E5%99%A8%E4%BB%A5%E5%8F%8A%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B9%B3%E5%8F%B0%E5%8F%91%E5%B8%83.html</id>
+    <published>2020-03-04T05:30:45.000Z</published>
+    <updated>2020-03-04T05:30:45.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="/images/2020/03/04/05678c20-5dd9-11ea-b2bc-715072670a2e.png" alt="image.png"><br>Ampere发布了80核的ARM处理器Altra，3.0 Ghz Turbo，这货号称吊打AMD EPYC和Intel Xeon Platinum..<br><img src="/images/2020/03/04/fad0d2d0-5dd8-11ea-b2bc-715072670a2e.png" alt="image.png"><br>同时发布了基于Ampere Altra的单路（Mt. Snow）与双路平台(Mt. Jade)，1U和2U规格，不知道有没有机会接触到呢。<br><img src="/images/2020/03/04/2051f570-5dd9-11ea-b2bc-715072670a2e.png" alt="image.png"></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;/images/2020/03/04/05678c20-5dd9-11ea-b2bc-715072670a2e.png&quot; alt=&quot;image.png&quot;&gt;&lt;br&gt;Ampere发布了80核的ARM处理器Altra，3.0 Ghz Turbo，这货号称吊打A
+      
+    
+    </summary>
+    
+    
+      <category term="Server" scheme="http://jimizhou.xyz/categories/Server/"/>
+    
+    
+      <category term="Server" scheme="http://jimizhou.xyz/tags/Server/"/>
+    
+      <category term="AMD" scheme="http://jimizhou.xyz/tags/AMD/"/>
+    
+      <category term="Intel" scheme="http://jimizhou.xyz/tags/Intel/"/>
+    
+      <category term="Ampere" scheme="http://jimizhou.xyz/tags/Ampere/"/>
+    
+      <category term="Altra" scheme="http://jimizhou.xyz/tags/Altra/"/>
+    
+      <category term="CPU" scheme="http://jimizhou.xyz/tags/CPU/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>尝试了一下Hyperlapse大范围延时摄影</title>
+    <link href="http://jimizhou.xyz/%E5%B0%9D%E8%AF%95%E4%BA%86%E4%B8%80%E4%B8%8BHyperlapse%E5%A4%A7%E8%8C%83%E5%9B%B4%E5%BB%B6%E6%97%B6%E6%91%84%E5%BD%B1.html"/>
+    <id>http://jimizhou.xyz/%E5%B0%9D%E8%AF%95%E4%BA%86%E4%B8%80%E4%B8%8BHyperlapse%E5%A4%A7%E8%8C%83%E5%9B%B4%E5%BB%B6%E6%97%B6%E6%91%84%E5%BD%B1.html</id>
+    <published>2019-05-03T14:31:24.000Z</published>
+    <updated>2020-03-04T05:34:27.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="Hyperlapse-大范围延时"><a href="#Hyperlapse-大范围延时" class="headerlink" title="Hyperlapse 大范围延时"></a>Hyperlapse 大范围延时</h4><p>Hyperlapse相比普通定点延时摄影，机位处于持续移动过程中，画面给人一种很有气势的感觉。上个暑假的某一天突然心血来潮，拿起相机照着教程拍了一下午，脖子眼睛很是遭罪，后期处理的时候也花了不少时间。</p><p>这里用到了<strong>LR</strong>批量预处理导出<strong>XML</strong>文件，然后用<strong>LRT</strong>来处理这些序列，最后倒入<strong>PR</strong>内生成视频。前期在取景的时候尽可能把某一标志点放在画面相同位置，这样在后期处理的时候就不需要裁剪和放大，提高素材可用率。  </p><iframe width="560" height="315" src="https://www.youtube.com/embed/9UhYQYatIrc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;Hyperlapse-大范围延时&quot;&gt;&lt;a href=&quot;#Hyperlapse-大范围延时&quot; class=&quot;headerlink&quot; title=&quot;Hyperlapse 大范围延时&quot;&gt;&lt;/a&gt;Hyperlapse 大范围延时&lt;/h4&gt;&lt;p&gt;Hyperlapse相比普通
+      
+    
+    </summary>
+    
+    
+      <category term="Video" scheme="http://jimizhou.xyz/categories/Video/"/>
+    
+    
+      <category term="Hyperlapse" scheme="http://jimizhou.xyz/tags/Hyperlapse/"/>
+    
+      <category term="延时摄影" scheme="http://jimizhou.xyz/tags/%E5%BB%B6%E6%97%B6%E6%91%84%E5%BD%B1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记一次惨痛的rm -rf</title>
+    <link href="http://jimizhou.xyz/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%83%A8%E7%97%9B%E7%9A%84rm-rf.html"/>
+    <id>http://jimizhou.xyz/%E8%AE%B0%E4%B8%80%E6%AC%A1%E6%83%A8%E7%97%9B%E7%9A%84rm-rf.html</id>
+    <published>2019-05-01T10:22:41.000Z</published>
+    <updated>2020-03-04T05:43:42.000Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h4><p>在尝试给黑苹果的 <code>DW1820A</code> 无线网卡装驱动时，因为某个 <code>kext</code> 文件冲突进不去系统，遂重启引导进入Linux， <code>root</code> 用户下挂载 <code>EFI</code> 分区，进入Clover的kext文件夹，删除了一部分疑似冲突的驱动。</p><h4 id="致命操作"><a href="#致命操作" class="headerlink" title="致命操作"></a>致命操作</h4><p>在删除驱动后，想到可能是网卡PCI id不在ISO80211的列表内，遂将U盘内存有的 <code>FakePCIID.kext</code> 拷入 <code>EFI分区</code> ，此时依然在root环境下，用 <code>cp /media/temp/FakePCIID.kext -r /home/Desktop</code> 命令拷贝成功（此处我也不知道为什么当时顺手拷到了桌面上…），然后想删除原文件，键盘Up调出历史后直接改 <code>cp</code> 为 <code>rm -rf</code> 忽略了后面还跟着<code>/home/Desktop</code></p><h4 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h4><p>导致 <code>/Desktop</code> 被删，桌面图标全无，为了方便放在桌面的论文内容被删，万幸Google Drive有备份。</p><h4 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h4><p><strong>切记切记切记</strong> <code>rm -rf</code> 不能随手就用，回车敲太快，泪流满键盘TAT</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;起因&quot;&gt;&lt;a href=&quot;#起因&quot; class=&quot;headerlink&quot; title=&quot;起因&quot;&gt;&lt;/a&gt;起因&lt;/h4&gt;&lt;p&gt;在尝试给黑苹果的 &lt;code&gt;DW1820A&lt;/code&gt; 无线网卡装驱动时，因为某个 &lt;code&gt;kext&lt;/code&gt; 文件冲突进不去系
+      
+    
+    </summary>
+    
+    
+      <category term="Tech stuff" scheme="http://jimizhou.xyz/categories/Tech-stuff/"/>
+    
+    
+      <category term="rm-rf" scheme="http://jimizhou.xyz/tags/rm-rf/"/>
+    
+      <category term="Hackintosh" scheme="http://jimizhou.xyz/tags/Hackintosh/"/>
+    
+      <category term="Linux" scheme="http://jimizhou.xyz/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>翻出六年前的播放器-Sandisk Sansa Clip+ with Rockbox</title>
+    <link href="http://jimizhou.xyz/%E7%BF%BB%E5%87%BA%E5%85%AD%E5%B9%B4%E5%89%8D%E7%9A%84%E6%92%AD%E6%94%BE%E5%99%A8-Sandisk-Sansa-Clip-with-Rockbox.html"/>
+    <id>http://jimizhou.xyz/%E7%BF%BB%E5%87%BA%E5%85%AD%E5%B9%B4%E5%89%8D%E7%9A%84%E6%92%AD%E6%94%BE%E5%99%A8-Sandisk-Sansa-Clip-with-Rockbox.html</id>
+    <published>2019-04-01T16:21:15.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<div align=center>![](https://i.loli.net/2019/04/02/5ca2922d7dd9d.jpeg)<p><em>Sandisk Sansa Clip+</em></p></div><p>最近翻出了高中时候老爸HK带回来的闪迪Sansa Clip+，2GB的内存，里面还有一张完整的12年Grammy专辑。</p><div align=center>![](https://i.loli.net/2019/04/02/5ca290076c697.png)<p><em>Rockbox,a free replacement firmware for digital music players</em></p></div><p>发现当年就折腾过<a href="https://www.rockbox.org/" target="_blank" rel="noopener">Rockbox</a>这个强大的自制系统，支持FLAC，APE等许多无损格式解码，更好的音质，定制主题，各种有意思的小游戏，小小的屏幕玩出了花。查了下最新的release是17年的3.14版本，于是给Clip升级了系统，同时也保留了原版系统，偶尔也可以用回原生，会更省电一些。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;div align=center&gt;
+![](https://i.loli.net/2019/04/02/5ca2922d7dd9d.jpeg)
+
+&lt;p&gt;&lt;em&gt;Sandisk Sansa Clip+&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;最近翻出了高中时候老爸HK带回来的闪迪
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>比Airdrop还好用的跨平台神器-Snapdrop</title>
+    <link href="http://jimizhou.xyz/%E6%AF%94Airdrop%E8%BF%98%E5%A5%BD%E7%94%A8%E7%9A%84%E7%A5%9E%E5%99%A8-Snapdrop.html"/>
+    <id>http://jimizhou.xyz/%E6%AF%94Airdrop%E8%BF%98%E5%A5%BD%E7%94%A8%E7%9A%84%E7%A5%9E%E5%99%A8-Snapdrop.html</id>
+    <published>2019-04-01T15:41:42.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<div align=center>![](https://i.loli.net/2019/04/02/5ca291de03793.png)<p><em>Source: Airdrop Wikipedia Page</em></p></div><p>在iPhone之间，iPhone和Macbook之间，习惯使用Airdrop传输照片和视频，非常方便快捷，然而最近由于经常需要使用Linux，有时需要手机上的某一张图片，如果通过微信网页版或者Electron Wechat传输，需要扫码登录，非常麻烦费时,另外文件会经过TX的服务器，一直留在“文件传输助手”中。<br>最近在Github上偶然发现了<a href="https://github.com/RobinLinus/snapdrop" target="_blank" rel="noopener">Snapdrop</a>这一神器，基于WebRTC(iOS设备使用WebSocket)与NodeJS，能够实现本地任意设备之间通过浏览器的P2P连接，也就是说，无论你是安卓，Linux，macOS或是Windows，都可以通过Snapdrop非常方便地传输照片以及任何文件，无中间服务器，文件点对点传输，简直美滋滋！</p><div align=center><img src="https://i.loli.net/2019/04/02/5ca28e25bd3ca.png" width="50%" height="50%"><p><em>Snapdrop iOS端界面</em></p><p><img src="https://i.loli.net/2019/04/02/5ca28e4f87051.png" alt=""></p><p><em>Snapdrop Linux下Chrome浏览器界面</em></p></div>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;div align=center&gt;
+![](https://i.loli.net/2019/04/02/5ca291de03793.png)
+
+&lt;p&gt;&lt;em&gt;Source: Airdrop Wikipedia Page&lt;/em&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;p&gt;在iPhone之间
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>GOES卫星信号解调-GNUradio</title>
+    <link href="http://jimizhou.xyz/GOES-Satellite.html"/>
+    <id>http://jimizhou.xyz/GOES-Satellite.html</id>
+    <published>2018-11-02T16:00:00.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><em>本文翻译自<a href="https://www.teske.net.br/lucas/2016/10/goes-satellite-hunt-part-2-demodulator/" target="_blank" rel="noopener">Let’s hack it</a>-GOES Satellite Hunt (Part 2 – Demodulator), 仅供学习参考。</em></p><h2 id="关于BPSK"><a href="#关于BPSK" class="headerlink" title="关于BPSK"></a><a href="#关于BPSK" title="关于BPSK"></a>关于BPSK</h2><p>首先，我们已经成功从<strong>GOES</strong>卫星得到了<strong>LRIT</strong>信号。解调的第一步为使用<strong>SDR</strong>(<em>Software Defined Radio</em>)，例如<strong>Airspy</strong>或<strong>RTLSDR</strong>，将基带信号转化为符号流。这里我们将使用<strong>GNU Radio</strong>来制作我们的解调器。</p><h2 id="LRIT信号详细参数"><a href="#LRIT信号详细参数" class="headerlink" title="LRIT信号详细参数"></a><a href="#LRIT信号详细参数" title="LRIT信号详细参数"></a>LRIT信号详细参数</h2><p><img src="/images/LRIT.png" alt=""></p><p>由参数表可知，<strong>LRIT</strong>信号使用<strong>BPSK</strong>(<em>Binary Phase Shift Keying,双相相移键控</em>)调制，符号率为<strong>293883符号/秒</strong>。我们面临的第一个问题是，BPSK调制是如何工作的？</p><p>首先，我们有两个信号：载波和我们想要发送的二进制流。载波是一个正弦信号，它将沿路径传送调制数据。它的频率通常y远高于比特率或符号率。在<strong>BPSK</strong>调制中，我们基本上是通过改变信号的相位来达到调制的目的。由于它是二进制相移，我们基本上只反转信号的相位，即反转信号的局部极性。可以在下图中看到，当我们改变极性时，我们会在载波上产生“陷波”。这就是使用二进制相移调制比特到载波中的方法。改变相位的优点是我们只需要在接收端中得到相同的相位，而不需要很高的信号幅值。</p><p><img src="/images/BPSK.png" alt=""></p><p><em>BPSK调制</em></p><p>因此：</p><ul><li>当传输值为<strong>“1”</strong>,载波相移为<strong>0</strong>度。</li><li>当传输值为<strong>“0”</strong>,载波相移为<strong>180</strong>度(<em>反相</em>)。</li></ul><p>其实很简单对吧？所以我们可以在相位图中表示出我们的数据。以下是一些<strong>PSK</strong>调制的相位图(<strong>BPSK,QPSK,8-PSK</strong>)</p><p><img src="/images/PSK.png" alt=""></p><p>因此对于相位图中的BPSK，我们基本上有：</p><ul><li>对于<strong>正I</strong>（象限0和3），代表<strong>“0”</strong>。</li><li>对于<strong>负I</strong>（象限1和2），代表<strong>“1”</strong>。</li></ul><p>仅供参考，在<strong>QPSK（b）</strong>中我们将使用_格雷编码_的二进制值：<strong>00，01，11，10。</strong></p><p>这同样适用于<strong>8-PSK</strong>，但<strong>8-PSK</strong>使用<strong>3</strong>比特来组成数据。通常二进制代码是从<strong>0</strong>开始的_格雷码_并逆时针增加。</p><h2 id="解调BPSK信号"><a href="#解调BPSK信号" class="headerlink" title="解调BPSK信号"></a><a href="#解调BPSK信号" title="解调BPSK信号"></a>解调BPSK信号</h2><p>那么，反向进行这一调制过程，也就是我们将要研究的解调信号方法。</p><p>首先，我们需要确保我们的载波位于基带（_频谱中心_）。你可能认为只需在<strong>1691MHz</strong>进行调谐即可确保这一点，但我们需要考虑以下因素：</p><ul><li><strong>SDR</strong>调频晶体不是100％精确，并且会与实际信号有一些偏差。</li><li><strong>SDR</strong>上的温度变化也会导致信号偏差。</li><li>风,大气和其他因素会导致信号产生<strong>多普勒频移</strong>。</li></ul><p>怎么办呢？我们需要找到信号的真实位置，并转换到基带（频谱中心）。但是我们遇到了一个问题：</p><p><em>LRIT信号实际上并不包含载波，只包含调制信号（因此它的信号是调制载波的结果）。</em></p><p>如果信号中包含载波，我们可以使用简单的PLL（锁相环）来跟踪载波并转换信号。但是由于载波会消耗传输功率，为了达到跟踪信号的目的，来自卫星的传输功率将被“浪费”在信号中。对于像<strong>LRIT</strong>这样的无载波信号，我们需要使用更复杂的<strong>PLL</strong>系统。有几种系统可以做到这一点，但我将使用<strong>Trango</strong>在_#hearsat_中建议的著名的<strong>Costas循环</strong>。</p><p><img src="/images/COSTAS.png" alt=""></p><p><em>Costas Loop Basic Diagram</em></p><p><strong>Costas Loop</strong>基本上是一个双<strong>PLL</strong>系统。主要思想是：如果我们假设的载波没有居中，则会出现相位误差，该误差会在正交信号中累积。使用此误差可以将我们的信号转换为基带信号。关于<strong>Costas循环</strong>如何工作的实际细节将不在这里讨论，因为有很多文档解释它的工作原理。对于<strong>BPSK</strong>，我们将使用二阶<strong>Costas循环</strong>，同时还存在对于<strong>QPSK</strong>的3阶<strong>Costas循环</strong>和<strong>8-PSK</strong>的4阶<strong>Costas循环</strong>。</p><p>好的，在将信号移到基带之后，我们需要恢复第二个信息：符号时钟。问题是：我们在载波上调制了一个二进制信号，但如果我们有一个<strong>10</strong>位的字符串，我们怎么知道字符串有<strong>10</strong>位，而不是<strong>5</strong>位或<strong>7</strong>位？我们需要使用<strong>M＆M（Mueller和Müller）</strong>算法恢复原始时钟。</p><p>为什么我们可以恢复原始数据时钟？</p><p>因为我们有两个信息：</p><ul><li>估计的符号率（在这种情况下为<strong>293883</strong>个符号/秒）</li><li>载波相位在<strong>0</strong>到<strong>1</strong>和<strong>1</strong>到<strong>0</strong>之间转换</li></ul><p>我们怎样才能用这些信息恢复？很简单，我们可以用估计的符号率做一个振荡器（时钟发生器），并与一个载波相位转换同步，之后我们可以认为找到了一个同步的时钟。另外由于数据的随机化（将在本文中进一步展示），二进制数据几乎是随机的，这意味着我们将具有基本相同的几率来获得位1或0.这将使我们的时钟同步随着时间推移更加一致。此外，<strong>M＆M算法</strong>还做了一个额外的事情，即时钟频率校正。由于符号率只是一个估计假设，这意味着其取值可能会随着时间的推移而变化，M＆M算法可以为我们纠正。</p><p>恢复时钟之后，在<strong>IQ Sample</strong>的<strong>I</strong>向量中我们将会得到信号对应的符号。</p><h2 id="GNU-Radio设计流程"><a href="#GNU-Radio设计流程" class="headerlink" title="GNU Radio设计流程"></a><a href="#GNU-Radio设计流程" title="GNU Radio设计流程"></a>GNU Radio设计流程</h2><p>让我们打开<strong>GNU Radio</strong>并构建我们的解调器。在<strong>GNU Radio</strong>中，我们将在<strong>Costas Loop</strong>和<strong>M＆M Recovery</strong>中增加一些额外的块。本设计中参数的值适用于<strong>Airspy R2 / Mini</strong>，但我很快也会为<strong>RTLSDR</strong>提供一个版本（仅在第一步中取不同的值）。正如<strong>Trango</strong>在_#hearsat_中所建议的那样，为了避免USB数据包丢失，最好在<strong>airspy</strong>中使用较低采样率（说实话我使用时从来没有任何USB数据包丢失，但这将在很大程度上取决于CPU和你的USB控制器。所以我们选择采样率时谨慎一些比较好。对于Airspy R2，我们将使用2.5Msps，而对于<strong>Airspy mini</strong>，我们可以使用<strong>3Msps</strong>。我们整个过程的目标采样率是<strong>1.25Msps</strong>（实际上我们可以使用接近该值的任何值）。那么让我们从<strong>osmocom</strong>块开始：</p><p><img src="/images/OSMOCOM.png" alt=""></p><p><em>Osmocom Source</em></p><p>让我们将采样率设置为3e6，将中心频率设置为1691e6，将所有增益设置为15.对于增益设置，您可以尝试自己的值，但我发现当所有参数使用最大值时我获得了最佳信噪比（这种情况不是很常见）。另外<strong>Osmocom Source</strong>对于<strong>airspy</strong>有一个“bug”，就是它没有得到混音器增益可用（因为它不是BB增益,这是愚蠢的）。我做了一个补丁（由于Gain名称而被主动拒绝）将混音器增益映射到BB增益（就像<strong>RTLSDR</strong>一样）。在将来，我可能会使用正确的名称编写一个新的<strong>GRC</strong>块与<strong>airspy</strong>一起使用，不过现在你可以从源代码编译: [gr-osmosdr](https：//github.com/racerxdl/gr- osmosdr) 使用我的fork。</p><h2 id="抽取并滤波至理想采样率"><a href="#抽取并滤波至理想采样率" class="headerlink" title="抽取并滤波至理想采样率"></a><a href="#抽取并滤波至理想采样率" title="抽取并滤波至理想采样率"></a>抽取并滤波至理想采样率</h2><p>下一步是抽取达到<strong>2.5e6</strong>的采样率。对于<strong>airspy mini</strong>，在<strong>3e6</strong>采样率时，为<strong>15/18</strong>。因此，让我们创建一个<strong>Rational Resampler</strong>块，并将<strong>15</strong>作为插值，将<strong>18</strong>作为抽取值。<strong>Taps</strong>可以为空，因为<strong>GNU Radio</strong>会自动生成。这不是最理想的，但至少现在可以使用。我将在未来为每个SDR发布更好的版本。</p><p><img src="/images/RATIONAL.png" alt=""></p><p>现在我们有<strong>2.5 Msps</strong>，我们需要将抽样率降低为二分之一。但我们也会将输入通过低通滤波器以达到我们的抽样率。因此，让我们创建一个低通滤波器，其抽取值为2，采样率为<strong>2.5e6</strong>，截止频率为<strong>symbol_rate * 2</strong>（即<strong>587766</strong>），过渡宽度为<strong>50e3</strong>。</p><p><img src="/images/LP.png" alt=""></p><p>在这一步之后采样率将变为<strong>1.25e6</strong></p><h2 id="自动增益控制以及根余弦滤波器"><a href="#自动增益控制以及根余弦滤波器" class="headerlink" title="自动增益控制以及根余弦滤波器"></a><a href="#自动增益控制以及根余弦滤波器" title="自动增益控制以及根余弦滤波器"></a>自动增益控制以及根余弦滤波器</h2><p>为了获得更好的性能，无论输入信号如何，我们都应将信号保持在恒定水平。为此，我们将使用自动增益控制，它将执行软件增益（基本上只是将信号以乘法的方式放大），不会改变分辨率（因此它不会输出更好的信号），但能够保持我们的电平不变。我们可以使用<strong>GNU Radio</strong>的<strong>AGC</strong>模块。</p><p><img src="/images/AGC.png" alt=""></p><p>速率为<strong>10e-3</strong>，参考值为<strong>0.5</strong>，增益为<strong>0.5</strong>，最大增益为<strong>4000</strong>。</p><p>另一步是<strong>RRC</strong>滤波器（根余弦滤波器）。这是针对<strong>nPSK</strong>调制优化的滤波器，并将其用作符号率的参数。滤波器不是很难生成（它是一个具有一些特定<strong>Taps</strong>的<strong>FIR</strong>），但幸运的是<strong>GNU Radio</strong>为我们提供了一个模块。</p><p><img src="/images/RRC.png" alt=""><br><em>RRC filter</em></p><p>对于<strong>RRC滤波器</strong>的参数，我们将使用<strong>1.25e6</strong>的采样率，符号率<strong>293883</strong>，<strong>Alpha=0.5，Num Taps=361。Alpha</strong>和符号率取自<strong>LRIT</strong>的参数。<strong>Taps</strong>的取值可以自由尝试，但我发现取<strong>361</strong>时能达到质量与性能之间的良好平衡。在滤波之后，我们应该能得到只包含<strong>BPSK</strong>调制信号（或同一频段的噪声）的信号。然后我们可以进入同步和时钟恢复的步骤。</p><h2 id="同步与时钟恢复"><a href="#同步与时钟恢复" class="headerlink" title="同步与时钟恢复"></a><a href="#同步与时钟恢复" title="同步与时钟恢复"></a>同步与时钟恢复</h2><p>正如我之前所说，我们将使用<strong>二阶Costas循环</strong>作为载波恢复（同步）和<strong>M＆M时钟恢复算法</strong>来恢复符号时钟。 <strong>GNU Radio</strong>为这两种算法都提供了对应的模块。让我们从<strong>Costas Loop</strong>开始吧。</p><p><img src="/images/COSTASLOOP.png" alt=""></p><p><em>Costas Loop</em></p><p>对于<strong>Costas loop</strong>的参数，我们只需要设置循环带宽为<strong>0.00199</strong>，阶数为<strong>2</strong>。之后我们应该在基带中拥有我们的虚拟载波。现在我们只需要使用<strong>M＆M时钟恢复算法</strong>将我们的样本与时钟同步。</p><p><img src="/images/MM.png" alt=""></p><p><em>M&amp;M Clock Recovery</em></p><p>对于<strong>M＆M算法</strong>的参数，我们将<strong>Omega</strong>取<strong>4.25339</strong>，这基本上是每个采样率上传输的符号数量，或<strong>sample_rate / symbol_rate</strong>。这是对<strong>M＆M算法</strong>的第一个象征性猜测。对于<strong>Gain Omega</strong>，我们使用<strong>（alpha ^ 2）/ 4</strong>，即<strong>alpha = 3.7e-3</strong>，所以我们的<strong>增益Omega</strong>为<strong>3.4225e-6</strong>，Mu为0.5，<strong>增益Mu</strong>为<strong>alpha</strong>（或<strong>3.7e-3</strong>），<strong>Omega Relative</strong>限制为<strong>5e-3</strong>。</p><p>所以你可以注意到我在<strong>M＆M算法</strong>中调用了一个新的参数<strong>alpha</strong>，它不是模块的直接参数。该<strong>alpha</strong>是一个参数，用于调整M＆M时钟恢复算法偏离初始猜测的程度。你可以尝试使用自己的值，但<strong>3.7e-3</strong>对我来说是最好的选择。</p><p>现在，在<strong>M＆M</strong>的输出中，我们将以正确的速率抽出复符号。现在我们只需要提取其中的数值。</p><h2 id="从GNU-Radio输出符号"><a href="#从GNU-Radio输出符号" class="headerlink" title="从GNU Radio输出符号"></a><a href="#从GNU-Radio输出符号" title="从GNU Radio输出符号"></a>从GNU Radio输出符号</h2><p>所以我们现在可以直接将所得到的信号映射得到二进制数据，但由于我将在文章的下一部分中解释的原因，我将保持符号不变，仅把他们转换为字节。所以基本上我们<strong>GNU Radio</strong>的输出将是一个有符号的字节，范围-128到127之间变化，-128为100％几率为0，127为100％有机会为1位。中间值为相应的机会。基本上我将有一个字节代表一个位为0或1的概率。我将在本文的下一部分解释更多。</p><p>现在我们需要做的是从M＆M模块获取Complex输出，只获得<strong>Real Part</strong>（_Component I_）转换为<strong>byte</strong>并输出（输出至文件或<strong>TCP</strong>管道）。</p><p><img src="/images/TCP.png" alt=""></p><p>这是一个使用两个模块的简单操作。首先，我们使用Complex to Real块，它将使用复数的<strong>Real</strong>组件输出<strong>Float</strong>，然后转换为<strong>char</strong>乘以127（因为<strong>Complex</strong>已标准化）。之后，我们可以使用<strong>File Sink</strong>输出到文件或创建矢量流以输出到<strong>TCP Socket</strong>。我将使用<strong>TCP</strong>套接字。</p><p><img src="/images/SOCKET.png" alt=""></p><p>在通过<strong>TCP</strong>发送之前，<strong>Stream to Vector</strong>只聚合每16个字节。这将减少<strong>TCP</strong>数据包开销。 <strong>TCP Sink</strong>参数为：</p><ul><li>输入类型：<strong>字节</strong></li><li>地址：<strong>127.0.0.1</strong></li><li>端口：<strong>5000</strong></li><li>模式：<strong>客户端</strong></li><li>长度：<strong>16</strong></li></ul><p>使用此参数，当我们运行<strong>GRC流程</strong>时，它将尝试通过端口5000连接到<strong>localhost</strong>，并通过<strong>TCP</strong>发送每组<strong>16</strong>个字节（或者你也可以选择发送符号）。本文的下一部分将讨论解码此问题的软件部分，并生成用于创建输出文件的数据包。您可以在下面查看我的最终流程图。它还有一些其他块可以更灵活地更改参数，还可以显示输入信号的瀑布/fft图以及星座图。</p><p><img src="/images/FINAL.png" alt=""></p><p><em>GRC源文件<a href="https://github.com/racerxdl/open-satellite-project/blob/master/GOES/demodulator/demod_tcp_qt.grc" target="_blank" rel="noopener">下载地址</a></em></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;em&gt;本文翻译自&lt;a href=&quot;https://www.teske.net.br/lucas/2016/10/goes-satellite-hunt-part-2-demodulator/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Let’s ha
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Pong Game on Zybo</title>
+    <link href="http://jimizhou.xyz/Pong-Game.html"/>
+    <id>http://jimizhou.xyz/Pong-Game.html</id>
+    <published>2018-10-19T16:00:00.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>This is a VHDL project using Zynq Zybo-7000, Xilinx Vivado and SDK 2018.2. It’s a PONG game based on VGA display.</p><h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><a href="#Introduction" title="Introduction"></a>Introduction</h3><p>This is a VHDL project using:</p><ul><li><a href="https://store.digilentinc.com/zybo-zynq-7000-arm-fpga-soc-trainer-board/" target="_blank" rel="noopener">Zynq Zybo-7000</a></li><li>Xilinx Vivado 2018.2</li><li>Xilinx SDK 2018.2</li></ul><p><a href="https://github.com/JimiZhou/Pong-Game-on-Zybo" target="_blank" rel="noopener">Github</a></p><h3 id="Block-Diagram"><a href="#Block-Diagram" class="headerlink" title="Block Diagram"></a><a href="#Block-Diagram" title="Block Diagram"></a>Block Diagram</h3><p><img src="/images/Block-Diagram.jpg" alt=""></p><h3 id="Features"><a href="#Features" class="headerlink" title="Features"></a><a href="#Features" title="Features"></a>Features</h3><ul><li><p>800x600@60Hz VGA Display. VGA controller referenced from <a href="https://www.digikey.com/eewiki/pages/viewpage.action?pageId=15925278#VGAController(VHDL)-Contact" target="_blank" rel="noopener">Digi-Key</a></p><ul><li><p>AXI register map created using <a href="https://airhdl.com/app/registerMaps.jsp" target="_blank" rel="noopener">airhdl</a>.</p></li><li><p>Characters saved in ROM in vectors(8*8 pixels format).</p><p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8  </p><p> constant FONT: rom :=<br>(<br>x”00”,x”18”,x”24”,x”24”,x”3C”,x”24”,x”24”,x”00”,      —- Character A<br>x”00”,x”38”,x”24”,x”38”,x”24”,x”24”,x”38”,x”00”,      —- Character B<br>x”00”,x”18”,x”24”,x”20”,x”20”,x”24”,x”18”,x”00”,      —- Character C<br>x”00”,x”38”,x”24”,x”24”,x”24”,x”24”,x”38”,x”00”,      —- Character D<br>……<br>);  </p></li><li><p>8*8 pixels ball stored in ROM:</p><p>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>10<br>11<br>12<br>13<br>14<br>15<br>16<br>17<br>18<br>19<br>20  </p><p> – 16 X 16 pixel ball<br>constant BALL: rom_ball :=  </p><p>“0000011111100000”, –      ******<br>“0001110101011000”, –    *** * * **<br>“0010000010101100”, –   *    * * ***<br>“0110000000010110”, –  **        * **<br>“0100000001010110”, –  *        * * **<br>“1000000000010011”, – *          *  **<br>“1000000000101111”, – *          * ****<br>“1000000000010101”, – *           * * *<br>“1000000001010011”, – *         * *  **<br>“1010100001010111”, – * * *    * * ***<br>“1010101010111011”, – * * * * * *** **<br>“0101010101001010”, –  * * * * *  * *<br>“0100000001010110”, –  *       * * **<br>“0011101101011100”, –  *** ** * ***<br>“0001111011111000”, –   **** *****<br>“0000011111100000” –      ******<br>);  </p></li><li><p>Two players: <em>Left</em> and <em>Right</em>. Controlled by GPIO buttons.</p></li></ul></li><li><p>Score board available. When one of the player gots 10 scores, the game ends.</p></li></ul><h3 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a><a href="#Notes" title="Notes"></a>Notes</h3><p>This is my first time writing VHDL and develop software-controlled design in Xilinx SDK. The code in VGA image source is not well organized, especially if user wants to add certain character in the game, it needs to be re-written and generate the bitstream again for SDK to work, and also the register map should be updated.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;This is a VHDL project using Zynq Zybo-7000, Xilinx Vivado and SDK 2018.2. It’s a PONG game based on VGA display.&lt;/p&gt;
+&lt;h3 id=&quot;Introductio
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Things I Bought</title>
+    <link href="http://jimizhou.xyz/Things-I-Bought.html"/>
+    <id>http://jimizhou.xyz/Things-I-Bought.html</id>
+    <published>2018-10-17T16:00:00.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><em>A boy who is fascinated with electronic devices.</em></p><p><em>Here’re the list of devices he’s playing and played with.</em></p><p><em>Catogories: <strong>Gaming,Laptop,Desktop</strong></em></p><p><em>Last update: Oct, 2018</em></p><h2 id="Gaming"><a href="#Gaming" class="headerlink" title="Gaming"></a><a href="#Gaming" title="Gaming"></a>Gaming</h2><ul><li><strong>Nintendo Switch</strong> <em>服役中</em><ul><li>塞尔达传说，马里奥赛车豪华版，星之卡比，空洞骑士…</li><li>任狗真香粉，能体验到塞尔达这样的大作，偶尔还能拿出来堡垒跳个伞，荣耀撸一把凡恩，能体验到这么优秀的主机/掌机平台实属幸运。</li></ul></li><li><strong>Nintendo New 3DS XL</strong> <em>闲置中</em><ul><li>口袋妖怪日/月，逆转裁判，路易吉鬼屋，火焰纹章…</li><li>间歇性怀旧，翻出来玩一些经典。</li></ul></li><li><strong>Razer Deathadder 3500DPI 炼狱狂蛇</strong> <em>服役中</em><ul><li>大一被拉入坑LOL之后入手的第一个游戏鼠标，至今还在正常使用，偶尔抽风双击一阵子_(毕竟双击蛇)_，考虑换个微动，还能再战三年。</li><li><strong>Logitech G610 Orion Brown 机械键盘</strong> <em>服役中</em></li><li>茶轴体验不错，兼顾日常打字以及游戏使用，吃鸡MOBA体验佳。</li></ul></li></ul><h2 id="Laptop"><a href="#Laptop" class="headerlink" title="Laptop"></a><a href="#Laptop" title="Laptop"></a>Laptop</h2><ul><li><strong>Dell Insprion 14</strong> <em>已退役</em><ul><li>4210U配上4G内存1336x768分辨率…上大学家里给买的第一台笔记本，说多了都是泪，不过也陪伴度过了很长一段时光。</li></ul></li><li><strong>ACER Aspire V5</strong> <em>服役中</em><ul><li>大二为了玩GTA5入手，1080P屏+6300HQ+950M+8GDDR4，基本满足专业软件，修图剪片和日常游戏需求。</li><li>小插曲：大三出国时带到了国外，没过两个月就烧掉了PCIe Bridge_(可能是因为家里有暖气，不小心过热了)_，导致入手了台式，后来带回国闲置一年有余，今年回国想起翻出来送修，救活之后正好填补了没有Win本的空缺。</li></ul></li><li><strong>Macbook Pro 13 2014</strong> <em>服役中</em><ul><li>Retina屏幕感天动地，特别是第一次从老Dell那反人类的1336分辨率换到MBP时，带来的体验是震撼的。</li><li>有了MBP的触摸板还要什么鼠标？</li><li>看文档/开发/码代码/修图好伴侣，与iOS设备配合使用体验极佳(特别是Airdrop)。</li></ul></li></ul><h2 id="Desktop"><a href="#Desktop" class="headerlink" title="Desktop"></a><a href="#Desktop" title="Desktop"></a>Desktop</h2><ul><li><strong>MSI Trident 3</strong> <em>服役中</em><ul><li>ITX机箱小，类似XBOX的体积，方便携带。</li><li>i7-7700，不带K也没有必要上K，散热压不住。</li><li>1060 3GB，阉割短卡，目前的大作基本够用。</li><li>16GB DDR4, 足够各种需求。</li></ul></li></ul><h2 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a><a href="#Camera" title="Camera"></a>Camera</h2><ul><li>To be updated</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;em&gt;A boy who is fascinated with electronic devices.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Here’re the list of devices he’s playing and played with.&lt;/em&gt;&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Roadtrip-Iceland-2017</title>
+    <link href="http://jimizhou.xyz/Roadtrip-Iceland-2017.html"/>
+    <id>http://jimizhou.xyz/Roadtrip-Iceland-2017.html</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Iceland Roadtrip 2017</p><p>Shoot with DJI Mavic Pro &amp; iPhone 6s</p><h2 id="Where-is-Iceland"><a href="#Where-is-Iceland" class="headerlink" title="Where is Iceland?"></a><a href="#Where-is-Iceland" title="Where is Iceland?"></a>Where is Iceland?</h2><iframe width="560" height="315" src="https://www.youtube.com/embed/NZaDYalKxg4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><p>Iceland, a Nordic island nation, is defined by its dramatic landscape with volcanoes, geysers, hot springs and lava fields. Massive glaciers are protected in Vatnajökull and Snæfellsjökull national parks. Most of the population lives in the capital, Reykjavik, which runs on geothermal power and is home to the National and Saga museums, tracing Iceland’s Viking history. – Google Map</p><p>小时候看世界地图，北大西洋<br>（To be continued…）</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Iceland Roadtrip 2017&lt;/p&gt;
+&lt;p&gt;Shoot with DJI Mavic Pro &amp;amp; iPhone 6s&lt;/p&gt;
+&lt;h2 id=&quot;Where-is-Iceland&quot;&gt;&lt;a href=&quot;#Where-is-Iceland&quot; class=&quot;he
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SMERGY Smart Pedal</title>
+    <link href="http://jimizhou.xyz/SMERGY.html"/>
+    <id>http://jimizhou.xyz/SMERGY.html</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. <strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>.  </p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><a href="#Introduction" title="Introduction"></a>Introduction</h2><p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T.</p><p><strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>. The goal is to raise awareness amongst people on what energy is, what is required to generate it and what they can actually do with this energy.</p><h2 id="Features"><a href="#Features" class="headerlink" title="Features:"></a><a href="#Features" title="Features:"></a>Features:</h2><ul><li>Powered by Arduino Nano.</li><li>Cycling cadence measurement.</li><li>Power measurement in both Red and Blue pedal.</li><li>Bluetooth interface with Android application.</li><li>Race between Red and Blue pedal.</li><li>Energy calculation and conversion of equivalent time to power certain device.<br>Event based leaderboard, local offline database.</li></ul><p><a href="https://github.com/JimiZhou/SMERGY-Smart-Pedal" target="_blank" rel="noopener">Github Repository</a> of SMERGY Application:</p><p>2018, Leuven, Belgium</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. &lt;strong&gt;SMERGY&lt;/strong&gt; stands f
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World-从WordPress转移到Hexo</title>
+    <link href="http://jimizhou.xyz/hello-world.html"/>
+    <id>http://jimizhou.xyz/hello-world.html</id>
+    <published>2018-09-27T16:00:00.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>很久以前就想搭建自己的博客，正巧在校的课程涉及到C，Linux以及网络通信，刚装上Ubuntu不久就买了一台自己的VPS，兴冲冲地ssh上去开始折腾。搭建之前的Blog选择的是<a href="https://digitalocean.com" target="_blank" rel="noopener">DigitalOcean</a>每月五美元的VPS，详细参数：</p><ul><li>Memory: <strong>1GB</strong></li><li>vCPUs: <strong>1vCPU</strong></li><li>SSD Disk: <strong>25GB</strong></li><li>Trasnfer: <strong>1TB</strong></li><li>Price: <strong>5 dollar/month</strong></li></ul><p>VPS使用<a href="https://www.centos.org/" target="_blank" rel="noopener">CenetOS</a> 6系统，安装了LMNP以及宝塔面板（当然还有ssr方便在国内折腾和上油管），搭建WordPress博客系统，使用Let’s Encrypt提供的证书开启了HTTPS，安装了一系列加速插件，并且尝试了SEO优化等等。</p><p>其实当时在VPS的博客搭建效果还算不错，个人的VPS也有不少有点，比如：</p><ul><li>Full Control. 既然是你买的VPS，想用 什么结构，选择什么软件版本，都是可以自己决定的，相对托管型博客自由度较大，如果你是HTML/CSS/PHP大神，想必用VPS做一个小小的博客不在话下。</li><li>Write anywhere, any platform. 使用WP搭建的博客，只要能用浏览器登陆后台便可以写作，不存在类似<a href="hexo.io">Hexo</a>那样需要搭建配置Git环境的情况，节省写作成本和时间，让你可以更加专心于写作。</li><li>Modification take effects instantly. 发布或者修改文章后，由于资源都存储在VPS中，刷新页面立刻就能看到新的改动。</li><li>Other Features. 例如可以搭梯子，用VPS跑微信机器人实现自动回复，或是使用例如KodExploer搭建个人云盘，存一些小电影和奇怪的种子文件。</li></ul><p>当然选择VPS也是有缺点的：</p><ul><li>Monthly Expense. 各大服务商一般最便宜的VPS也需要5美元一个月，对于还没有收入的学生党还是一笔开销。</li><li>只需要一个博客用来记录，而对于VPS的其他功能没有刚需的朋友，购买VPS则显得略有多余，考虑选择比如<a href="www.jianshu.com">简书</a>一类支持Markdown写作的网站博客。</li><li>购买VPS/购买域名/学习CentOS or Ubuntu各种命令/搭建LMNP/配置DNS/配置HTTPS…等等，学习成本过高。</li><li>某天服务器折腾挂了，又没有备份，此时你的博客和文章就gg了，又得花大量时间去研究抢救你的博客。</li></ul><h4 id="所以，我选择了Hexo"><a href="#所以，我选择了Hexo" class="headerlink" title="所以，我选择了Hexo"></a><a href="#所以，我选择了Hexo" title="所以，我选择了Hexo"></a>所以，我选择了Hexo</h4><p>（To be continued…）</p><p><em>这是第一次用Markdown写Blog， 对于语法还不熟悉，需要慢慢学习。</em></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;很久以前就想搭建自己的博客，正巧在校的课程涉及到C，Linux以及网络通信，刚装上Ubuntu不久就买了一台自己的VPS，兴冲冲地ssh上去开始折腾。搭建之前的Blog选择的是&lt;a href=&quot;https://digitalocean.com&quot; target=&quot;_blank
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>

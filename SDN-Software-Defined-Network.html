@@ -1,34 +1,26 @@
-extends partial/layout
-
-include mixins
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || strip_html(page.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 150);
-    meta(name="description", content=desc)
-
-block content
-  .autopagerize_page_element: .content: .post-page
-    include mixins
-    +make_post(page, true)
-    .share
-      .evernote
-        a.fa.fa-bookmark(href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);}})();", ref="nofollow", target="_blank")
-      .weibo
-        a.fa.fa-weibo(href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));")
-      .twitter
-        a.fa.fa-twitter(href=url_for("http://twitter.com/home?status="+","+config.url+"/"+page.path+","+config.title+","+page.title+",;"))
-    - var prev = page.prev ? page.prev.path : false;
-    - var next = page.next ? page.next.path : false;
-    .pagination
-      ul.clearfix
-        if prev
-          li.pre.pagbuttons
-            a.btn(role="navigation",href=url_for(prev), title=page.prev.title)!= __('prev_post')
-        if next
-          li.next.pagbuttons
-            a.btn(role="navigation",href=url_for(next), title=page.next.title)!= __('next_post')
-    if page.comments
-        include partial/comments
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Jimi"><title>SDN-Software Defined Network · Jimi's Blog</title><meta name="description" content="Software Defined Network软件定义网络（Software Defined Network, SDN ），是由美国斯坦福大学clean slate研究组提出的一种新型网络创新架构，核心理念是，希望应用软件可以参与对网络的控制管理，满足上层业务需求，通过自动化业务部署简化网络运维。"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Jimi's Blog</a></h3><div class="description"><p>Things I made and things I love.</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me" target="_blank" rel="noopener"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>SDN-Software Defined Network</a></h3></div><div class="post-content"><h1 id="Software-Defined-Network"><a href="#Software-Defined-Network" class="headerlink" title="Software Defined Network"></a>Software Defined Network</h1><p>软件定义网络（Software Defined Network, SDN ），是由美国斯坦福大学clean slate研究组提出的一种新型网络创新架构，核心理念是，希望应用软件可以参与对网络的控制管理，满足上层业务需求，通过自动化业务部署简化网络运维。<br><img src="/images/2020/03/23/bbef7aa0-6cd1-11ea-ba8a-4bfcfac4c4f3.png" alt="image.png"><br>SDN三大特征：</p>
+<ol>
+<li>控制转发分离</li>
+<li>网络虚拟化</li>
+<li>可编程接口<br><img src="/images/2020/03/23/e238a0d0-6cd4-11ea-ba8a-4bfcfac4c4f3.png" alt="image.png"><h2 id="Open-vSwitch"><a href="#Open-vSwitch" class="headerlink" title="Open vSwitch"></a>Open vSwitch</h2>即OVS，虚拟交换机的一种</li>
+</ol>
+<ul>
+<li>方便网络管理监控。方便管理员对整套云环境中的网络状态和数据流量进行监控，比如可以分析网络中流淌的数据包是来自哪个 VM、哪个 OS 及哪个用户，这些都可以借助 OVS 提供的工具来达到。</li>
+<li>加速数据包寻路与转发。相比 Bridge 单纯的基于 MAC 地址学习的转发规则，OVS 引入流缓存的机制，可以加快数据包的转发效率。</li>
+<li>基于SDN的控制面与数据面分离的思想。OVS 控制面负责流表的学习与下发，具体的转发动作则有数据面来完成。可扩展性强。</li>
+<li>隧道协议支持。Bridge 只支持 VxLAN，OVS 支持 gre/vxlan/IPsec 等。</li>
+<li>适用于 Xen、KVM、VirtualBox、VMware 等多种 Hypervisors。</li>
+</ul>
+<h3 id="OVS结构"><a href="#OVS结构" class="headerlink" title="OVS结构"></a>OVS结构</h3><p>::: hljs-center</p>
+<p><img src="/images/2020/03/19/2b12bcb0-69a5-11ea-aeb8-dd811e2c01c4.png" alt="image.png"></p>
+<p>:::<br>如图所示，OVS 在 Linux 用户态和内核态都实现了相应的模块，用户态主要组件有数据库服务 ovsdb-server 和守护进程 ovs-vswitchd。内核态中实现了 datapath 模块。其中， ovs-vswitchd 和 datapath 共同构成了 OVS 的数据面，控制面由 controller 模块来完成，controller 一般表示的是 <strong>OpenFlow</strong>控制器，在 OVS 中，它可以借由第三方来完成，只要支持<strong>OpenFlow</strong>协议即可。</p>
+<h3 id="OpenFlow"><a href="#OpenFlow" class="headerlink" title="OpenFlow"></a>OpenFlow</h3><p>OpenFlow 是控制面和数据面通信的一套协议，我们常常把支持 OpenFlow 协议的交换机称为 OpenFlow 交换机，控制器称为 OpenFlow 控制器，业界比较知名的 OpenFlow 控制器有 OpenDaylight、ONOS 等。</p>
+<p>OpenFlow 是一个独立的完整的流表协议，不依赖于 OVS，OVS 只是支持 OpenFlow 协议，有了支持，就可以使用 OpenFlow 控制器来管理 OVS 中的流表。OpenFlow 不仅仅支持虚拟交换机，某些硬件交换机也支持 OpenFlow 协议。</p>
+<h3 id="ovs-vswitchd"><a href="#ovs-vswitchd" class="headerlink" title="ovs-vswitchd"></a>ovs-vswitchd</h3><p>ovs-vswitchd 是 OVS 的核心组件，它和内核模块 datapath 共同构成了 OVS 的数据面。它使用 OpenFlow 协议与 OpenFlow 控制器通信，使用 OVSDB 协议与 ovsdb-server 通信，使用 netlink 和 datapath 内核模块通信。</p>
+<h3 id="ovsdb-server"><a href="#ovsdb-server" class="headerlink" title="ovsdb-server"></a>ovsdb-server</h3><p>ovsdb-server 是 OVS 轻量级的数据库服务，用于整个 OVS 的配置信息，包括接口、交换内容、VLAN 等，ovs-vswitchd 根据这些配置信息工作。</p>
+<h3 id="OpenFlow-控制器"><a href="#OpenFlow-控制器" class="headerlink" title="OpenFlow 控制器"></a>OpenFlow 控制器</h3><p>OpenFlow 控制器可以通过 OpenFlow 协议连接到任何支持 OpenFlow 的交换机，比如 OVS 。控制器通过向交换机下发流表规则来控制数据流向。</p>
+<h3 id="Kernel-Datapath"><a href="#Kernel-Datapath" class="headerlink" title="Kernel Datapath"></a>Kernel Datapath</h3><p>datapath 内核模块和 ovs-vswitchd 是相互协作工作的，datapath 负责具体的收发包，而 ovs-vswitchd 通过 controller 下发的流表规则指导 datapath 如何转发包。</p>
+<p>举个例子，datapath 从主机物理网卡 NIC 或者 VM 的 虚拟网卡 vNIC 收到包，如果是第一次收到包，datapath 不知道怎么处理这个包，于是将其丢给 ovs-vswitchd ， ovs-vswitchd 决定该如何处理这个包之后又丢给 datapath，datapath 根据 ovs-vswitchd 的指示执行相应的动作，是丢弃还是从哪个口传出去。同时，ovs-vswitchd 会让 datapath 缓存好这个包的动作，下次再来就可以直接执行动作。</p>
+<p>如果不是第一次收到包，就是按照之前缓存好的动作执行，这样极大地提高了数据处理的速度。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.chinastor.com/network/sdn/102442P92019.html" target="_blank" rel="noopener">一文看懂SDN软件定义网络，概念、原理、架构及实现各环节介绍</a><br><a href="https://www.cnblogs.com/bakari/p/8097439.html" target="_blank" rel="noopener">从 Bridge 到 OVS，探索虚拟交换机</a><br><a href="http://www.muzixing.com/pages/2015/06/22/chu-xue-zhe-de-sdnxue-xi-zhi-lu.html" target="_blank" rel="noopener">初学者的SDN学习之路</a></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2020-03-18</span><i class="fa fa-tag"></i><a class="tag" href="/categories/Tech-stuff/" title="Tech stuff">Tech stuff </a><a class="tag" href="/tags/SDN/" title="SDN">SDN </a></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://jimizhou.xyz/SDN-Software-Defined-Network.html,Jimi' target="_blank" rel="noopener"s Blog,SDN-Software Defined Network,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/20200326.html" title="20200326">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/20200318-Note.html" title="20200318-Note">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

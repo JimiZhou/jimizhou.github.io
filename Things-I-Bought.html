@@ -1,34 +1,55 @@
-extends partial/layout
-
-include mixins
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || strip_html(page.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 150);
-    meta(name="description", content=desc)
-
-block content
-  .autopagerize_page_element: .content: .post-page
-    include mixins
-    +make_post(page, true)
-    .share
-      .evernote
-        a.fa.fa-bookmark(href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);}})();", ref="nofollow", target="_blank")
-      .weibo
-        a.fa.fa-weibo(href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));")
-      .twitter
-        a.fa.fa-twitter(href=url_for("http://twitter.com/home?status="+","+config.url+"/"+page.path+","+config.title+","+page.title+",;"))
-    - var prev = page.prev ? page.prev.path : false;
-    - var next = page.next ? page.next.path : false;
-    .pagination
-      ul.clearfix
-        if prev
-          li.pre.pagbuttons
-            a.btn(role="navigation",href=url_for(prev), title=page.prev.title)!= __('prev_post')
-        if next
-          li.next.pagbuttons
-            a.btn(role="navigation",href=url_for(next), title=page.next.title)!= __('next_post')
-    if page.comments
-        include partial/comments
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Jimi"><title>Things I Bought · Jimi's Blog</title><meta name="description" content="A boy who is fascinated with electronic devices.
+Here’re the list of devices he’s playing and played with.
+Catogories: Gaming,Laptop,Desktop
+Last upda"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Jimi's Blog</a></h3><div class="description"><p>Things I made and things I love.</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me" target="_blank" rel="noopener"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>Things I Bought</a></h3></div><div class="post-content"><p><em>A boy who is fascinated with electronic devices.</em></p>
+<p><em>Here’re the list of devices he’s playing and played with.</em></p>
+<p><em>Catogories: <strong>Gaming,Laptop,Desktop</strong></em></p>
+<p><em>Last update: Oct, 2018</em></p>
+<h2 id="Gaming"><a href="#Gaming" class="headerlink" title="Gaming"></a><a href="#Gaming" title="Gaming"></a>Gaming</h2><ul>
+<li><strong>Nintendo Switch</strong> <em>服役中</em><ul>
+<li>塞尔达传说，马里奥赛车豪华版，星之卡比，空洞骑士…</li>
+<li>任狗真香粉，能体验到塞尔达这样的大作，偶尔还能拿出来堡垒跳个伞，荣耀撸一把凡恩，能体验到这么优秀的主机/掌机平台实属幸运。</li>
+</ul>
+</li>
+<li><strong>Nintendo New 3DS XL</strong> <em>闲置中</em><ul>
+<li>口袋妖怪日/月，逆转裁判，路易吉鬼屋，火焰纹章…</li>
+<li>间歇性怀旧，翻出来玩一些经典。</li>
+</ul>
+</li>
+<li><strong>Razer Deathadder 3500DPI 炼狱狂蛇</strong> <em>服役中</em><ul>
+<li>大一被拉入坑LOL之后入手的第一个游戏鼠标，至今还在正常使用，偶尔抽风双击一阵子_(毕竟双击蛇)_，考虑换个微动，还能再战三年。</li>
+<li><strong>Logitech G610 Orion Brown 机械键盘</strong> <em>服役中</em></li>
+<li>茶轴体验不错，兼顾日常打字以及游戏使用，吃鸡MOBA体验佳。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Laptop"><a href="#Laptop" class="headerlink" title="Laptop"></a><a href="#Laptop" title="Laptop"></a>Laptop</h2><ul>
+<li><strong>Dell Insprion 14</strong> <em>已退役</em><ul>
+<li>4210U配上4G内存1336x768分辨率…上大学家里给买的第一台笔记本，说多了都是泪，不过也陪伴度过了很长一段时光。</li>
+</ul>
+</li>
+<li><strong>ACER Aspire V5</strong> <em>服役中</em><ul>
+<li>大二为了玩GTA5入手，1080P屏+6300HQ+950M+8GDDR4，基本满足专业软件，修图剪片和日常游戏需求。</li>
+<li>小插曲：大三出国时带到了国外，没过两个月就烧掉了PCIe Bridge_(可能是因为家里有暖气，不小心过热了)_，导致入手了台式，后来带回国闲置一年有余，今年回国想起翻出来送修，救活之后正好填补了没有Win本的空缺。</li>
+</ul>
+</li>
+<li><strong>Macbook Pro 13 2014</strong> <em>服役中</em><ul>
+<li>Retina屏幕感天动地，特别是第一次从老Dell那反人类的1336分辨率换到MBP时，带来的体验是震撼的。</li>
+<li>有了MBP的触摸板还要什么鼠标？</li>
+<li>看文档/开发/码代码/修图好伴侣，与iOS设备配合使用体验极佳(特别是Airdrop)。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Desktop"><a href="#Desktop" class="headerlink" title="Desktop"></a><a href="#Desktop" title="Desktop"></a>Desktop</h2><ul>
+<li><strong>MSI Trident 3</strong> <em>服役中</em><ul>
+<li>ITX机箱小，类似XBOX的体积，方便携带。</li>
+<li>i7-7700，不带K也没有必要上K，散热压不住。</li>
+<li>1060 3GB，阉割短卡，目前的大作基本够用。</li>
+<li>16GB DDR4, 足够各种需求。</li>
+</ul>
+</li>
+</ul>
+<h2 id="Camera"><a href="#Camera" class="headerlink" title="Camera"></a><a href="#Camera" title="Camera"></a>Camera</h2><ul>
+<li>To be updated</li>
+</ul>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-10-18</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://jimizhou.xyz/Things-I-Bought.html,Jimi' target="_blank" rel="noopener"s Blog,Things I Bought,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/Pong-Game.html" title="Pong Game on Zybo">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/Roadtrip-Iceland-2017.html" title="Roadtrip-Iceland-2017">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>

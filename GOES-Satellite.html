@@ -1,34 +1,85 @@
-extends partial/layout
-
-include mixins
-
-block site_title
-    != page.title + " · " + config.title
-
-block description
-    - var desc = page.desc || strip_html(page.content).replace(/^\s*/, '').replace(/\s*$/, '').substring(0, 150);
-    meta(name="description", content=desc)
-
-block content
-  .autopagerize_page_element: .content: .post-page
-    include mixins
-    +make_post(page, true)
-    .share
-      .evernote
-        a.fa.fa-bookmark(href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title);}})();", ref="nofollow", target="_blank")
-      .weibo
-        a.fa.fa-weibo(href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&title=',e(d.title),'&appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));")
-      .twitter
-        a.fa.fa-twitter(href=url_for("http://twitter.com/home?status="+","+config.url+"/"+page.path+","+config.title+","+page.title+",;"))
-    - var prev = page.prev ? page.prev.path : false;
-    - var next = page.next ? page.next.path : false;
-    .pagination
-      ul.clearfix
-        if prev
-          li.pre.pagbuttons
-            a.btn(role="navigation",href=url_for(prev), title=page.prev.title)!= __('prev_post')
-        if next
-          li.next.pagbuttons
-            a.btn(role="navigation",href=url_for(next), title=page.next.title)!= __('next_post')
-    if page.comments
-        include partial/comments
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><meta name="author" content="Jimi"><title>GOES卫星信号解调-GNUradio · Jimi's Blog</title><meta name="description" content="本文翻译自Let’s hack it-GOES Satellite Hunt (Part 2 – Demodulator), 仅供学习参考。
+关于BPSK首先，我们已经成功从GOES卫星得到了LRIT信号。解调的第一步为使用SDR(Software Defined Radio)，例如Airspy或R"><meta name="keywords"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="renderer" content="webkit"><link rel="short icon" href="/images/favicon.png" type="image/x-icon"><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/blog_basic.css"><link rel="stylesheet" href="/css/font-awesome.min.css"><link rel="alternate" type="application/atom+xml" title="ATOM 1.0" href="/atom.xml"><meta name="generator" content="Hexo 4.2.0"></head><body><div class="sidebar animated fadeInDown"><div class="logo-title"><div class="title"><img src="/images/logo@2x.png" style="width:127px;"><h3 title=""><a href="/">Jimi's Blog</a></h3><div class="description"><p>Things I made and things I love.</p></div></div></div><ul class="social-links"></ul><div class="footer"><a target="_blank" href="/"><span>Theme by </span></a><a href="https://www.caicai.me" target="_blank" rel="noopener"> CaiCai </a><span>&</span><a href="https://github.com/Ben02/hexo-theme-Anatole" target="_blank" rel="noopener"> Ben</a><div class="by_farbox"><a href="https://hexo.io/zh-cn/" target="_blank">Proudly published with Hexo&#65281;</a></div></div></div><div class="main"><div class="page-top animated fadeInDown"><div class="nav"><li><a href="/">首页</a></li><li><a href="/about">关于</a></li><li><a href="/archives">归档</a></li><li><a href="/links">友链</a></li></div><div class="information"><div class="back_btn"><li><a class="fa fa-chevron-left" onclick="window.history.go(-1)"> </a></li></div><div class="avatar"><img></div></div></div><div class="autopagerize_page_element"><div class="content"><div class="post-page"><div class="post animated fadeInDown"><div class="post-title"><h3><a>GOES卫星信号解调-GNUradio</a></h3></div><div class="post-content"><p><em>本文翻译自<a href="https://www.teske.net.br/lucas/2016/10/goes-satellite-hunt-part-2-demodulator/" target="_blank" rel="noopener">Let’s hack it</a>-GOES Satellite Hunt (Part 2 – Demodulator), 仅供学习参考。</em></p>
+<h2 id="关于BPSK"><a href="#关于BPSK" class="headerlink" title="关于BPSK"></a><a href="#关于BPSK" title="关于BPSK"></a>关于BPSK</h2><p>首先，我们已经成功从<strong>GOES</strong>卫星得到了<strong>LRIT</strong>信号。解调的第一步为使用<strong>SDR</strong>(<em>Software Defined Radio</em>)，例如<strong>Airspy</strong>或<strong>RTLSDR</strong>，将基带信号转化为符号流。这里我们将使用<strong>GNU Radio</strong>来制作我们的解调器。</p>
+<h2 id="LRIT信号详细参数"><a href="#LRIT信号详细参数" class="headerlink" title="LRIT信号详细参数"></a><a href="#LRIT信号详细参数" title="LRIT信号详细参数"></a>LRIT信号详细参数</h2><p><img src="/images/LRIT.png" alt=""></p>
+<p>由参数表可知，<strong>LRIT</strong>信号使用<strong>BPSK</strong>(<em>Binary Phase Shift Keying,双相相移键控</em>)调制，符号率为<strong>293883符号/秒</strong>。我们面临的第一个问题是，BPSK调制是如何工作的？</p>
+<p>首先，我们有两个信号：载波和我们想要发送的二进制流。载波是一个正弦信号，它将沿路径传送调制数据。它的频率通常y远高于比特率或符号率。在<strong>BPSK</strong>调制中，我们基本上是通过改变信号的相位来达到调制的目的。由于它是二进制相移，我们基本上只反转信号的相位，即反转信号的局部极性。可以在下图中看到，当我们改变极性时，我们会在载波上产生“陷波”。这就是使用二进制相移调制比特到载波中的方法。改变相位的优点是我们只需要在接收端中得到相同的相位，而不需要很高的信号幅值。</p>
+<p><img src="/images/BPSK.png" alt=""></p>
+<p><em>BPSK调制</em></p>
+<p>因此：</p>
+<ul>
+<li>当传输值为<strong>“1”</strong>,载波相移为<strong>0</strong>度。</li>
+<li>当传输值为<strong>“0”</strong>,载波相移为<strong>180</strong>度(<em>反相</em>)。</li>
+</ul>
+<p>其实很简单对吧？所以我们可以在相位图中表示出我们的数据。以下是一些<strong>PSK</strong>调制的相位图(<strong>BPSK,QPSK,8-PSK</strong>)</p>
+<p><img src="/images/PSK.png" alt=""></p>
+<p>因此对于相位图中的BPSK，我们基本上有：</p>
+<ul>
+<li>对于<strong>正I</strong>（象限0和3），代表<strong>“0”</strong>。</li>
+<li>对于<strong>负I</strong>（象限1和2），代表<strong>“1”</strong>。</li>
+</ul>
+<p>仅供参考，在<strong>QPSK（b）</strong>中我们将使用_格雷编码_的二进制值：<strong>00，01，11，10。</strong></p>
+<p>这同样适用于<strong>8-PSK</strong>，但<strong>8-PSK</strong>使用<strong>3</strong>比特来组成数据。通常二进制代码是从<strong>0</strong>开始的_格雷码_并逆时针增加。</p>
+<h2 id="解调BPSK信号"><a href="#解调BPSK信号" class="headerlink" title="解调BPSK信号"></a><a href="#解调BPSK信号" title="解调BPSK信号"></a>解调BPSK信号</h2><p>那么，反向进行这一调制过程，也就是我们将要研究的解调信号方法。</p>
+<p>首先，我们需要确保我们的载波位于基带（_频谱中心_）。你可能认为只需在<strong>1691MHz</strong>进行调谐即可确保这一点，但我们需要考虑以下因素：</p>
+<ul>
+<li><strong>SDR</strong>调频晶体不是100％精确，并且会与实际信号有一些偏差。</li>
+<li><strong>SDR</strong>上的温度变化也会导致信号偏差。</li>
+<li>风,大气和其他因素会导致信号产生<strong>多普勒频移</strong>。</li>
+</ul>
+<p>怎么办呢？我们需要找到信号的真实位置，并转换到基带（频谱中心）。但是我们遇到了一个问题：</p>
+<p><em>LRIT信号实际上并不包含载波，只包含调制信号（因此它的信号是调制载波的结果）。</em></p>
+<p>如果信号中包含载波，我们可以使用简单的PLL（锁相环）来跟踪载波并转换信号。但是由于载波会消耗传输功率，为了达到跟踪信号的目的，来自卫星的传输功率将被“浪费”在信号中。对于像<strong>LRIT</strong>这样的无载波信号，我们需要使用更复杂的<strong>PLL</strong>系统。有几种系统可以做到这一点，但我将使用<strong>Trango</strong>在_#hearsat_中建议的著名的<strong>Costas循环</strong>。</p>
+<p><img src="/images/COSTAS.png" alt=""></p>
+<p><em>Costas Loop Basic Diagram</em></p>
+<p><strong>Costas Loop</strong>基本上是一个双<strong>PLL</strong>系统。主要思想是：如果我们假设的载波没有居中，则会出现相位误差，该误差会在正交信号中累积。使用此误差可以将我们的信号转换为基带信号。关于<strong>Costas循环</strong>如何工作的实际细节将不在这里讨论，因为有很多文档解释它的工作原理。对于<strong>BPSK</strong>，我们将使用二阶<strong>Costas循环</strong>，同时还存在对于<strong>QPSK</strong>的3阶<strong>Costas循环</strong>和<strong>8-PSK</strong>的4阶<strong>Costas循环</strong>。</p>
+<p>好的，在将信号移到基带之后，我们需要恢复第二个信息：符号时钟。问题是：我们在载波上调制了一个二进制信号，但如果我们有一个<strong>10</strong>位的字符串，我们怎么知道字符串有<strong>10</strong>位，而不是<strong>5</strong>位或<strong>7</strong>位？我们需要使用<strong>M＆M（Mueller和Müller）</strong>算法恢复原始时钟。</p>
+<p>为什么我们可以恢复原始数据时钟？</p>
+<p>因为我们有两个信息：</p>
+<ul>
+<li>估计的符号率（在这种情况下为<strong>293883</strong>个符号/秒）</li>
+<li>载波相位在<strong>0</strong>到<strong>1</strong>和<strong>1</strong>到<strong>0</strong>之间转换</li>
+</ul>
+<p>我们怎样才能用这些信息恢复？很简单，我们可以用估计的符号率做一个振荡器（时钟发生器），并与一个载波相位转换同步，之后我们可以认为找到了一个同步的时钟。另外由于数据的随机化（将在本文中进一步展示），二进制数据几乎是随机的，这意味着我们将具有基本相同的几率来获得位1或0.这将使我们的时钟同步随着时间推移更加一致。此外，<strong>M＆M算法</strong>还做了一个额外的事情，即时钟频率校正。由于符号率只是一个估计假设，这意味着其取值可能会随着时间的推移而变化，M＆M算法可以为我们纠正。</p>
+<p>恢复时钟之后，在<strong>IQ Sample</strong>的<strong>I</strong>向量中我们将会得到信号对应的符号。</p>
+<h2 id="GNU-Radio设计流程"><a href="#GNU-Radio设计流程" class="headerlink" title="GNU Radio设计流程"></a><a href="#GNU-Radio设计流程" title="GNU Radio设计流程"></a>GNU Radio设计流程</h2><p>让我们打开<strong>GNU Radio</strong>并构建我们的解调器。在<strong>GNU Radio</strong>中，我们将在<strong>Costas Loop</strong>和<strong>M＆M Recovery</strong>中增加一些额外的块。本设计中参数的值适用于<strong>Airspy R2 / Mini</strong>，但我很快也会为<strong>RTLSDR</strong>提供一个版本（仅在第一步中取不同的值）。正如<strong>Trango</strong>在_#hearsat_中所建议的那样，为了避免USB数据包丢失，最好在<strong>airspy</strong>中使用较低采样率（说实话我使用时从来没有任何USB数据包丢失，但这将在很大程度上取决于CPU和你的USB控制器。所以我们选择采样率时谨慎一些比较好。对于Airspy R2，我们将使用2.5Msps，而对于<strong>Airspy mini</strong>，我们可以使用<strong>3Msps</strong>。我们整个过程的目标采样率是<strong>1.25Msps</strong>（实际上我们可以使用接近该值的任何值）。那么让我们从<strong>osmocom</strong>块开始：</p>
+<p><img src="/images/OSMOCOM.png" alt=""></p>
+<p><em>Osmocom Source</em></p>
+<p>让我们将采样率设置为3e6，将中心频率设置为1691e6，将所有增益设置为15.对于增益设置，您可以尝试自己的值，但我发现当所有参数使用最大值时我获得了最佳信噪比（这种情况不是很常见）。另外<strong>Osmocom Source</strong>对于<strong>airspy</strong>有一个“bug”，就是它没有得到混音器增益可用（因为它不是BB增益,这是愚蠢的）。我做了一个补丁（由于Gain名称而被主动拒绝）将混音器增益映射到BB增益（就像<strong>RTLSDR</strong>一样）。在将来，我可能会使用正确的名称编写一个新的<strong>GRC</strong>块与<strong>airspy</strong>一起使用，不过现在你可以从源代码编译: [gr-osmosdr](https：//github.com/racerxdl/gr- osmosdr) 使用我的fork。</p>
+<h2 id="抽取并滤波至理想采样率"><a href="#抽取并滤波至理想采样率" class="headerlink" title="抽取并滤波至理想采样率"></a><a href="#抽取并滤波至理想采样率" title="抽取并滤波至理想采样率"></a>抽取并滤波至理想采样率</h2><p>下一步是抽取达到<strong>2.5e6</strong>的采样率。对于<strong>airspy mini</strong>，在<strong>3e6</strong>采样率时，为<strong>15/18</strong>。因此，让我们创建一个<strong>Rational Resampler</strong>块，并将<strong>15</strong>作为插值，将<strong>18</strong>作为抽取值。<strong>Taps</strong>可以为空，因为<strong>GNU Radio</strong>会自动生成。这不是最理想的，但至少现在可以使用。我将在未来为每个SDR发布更好的版本。</p>
+<p><img src="/images/RATIONAL.png" alt=""></p>
+<p>现在我们有<strong>2.5 Msps</strong>，我们需要将抽样率降低为二分之一。但我们也会将输入通过低通滤波器以达到我们的抽样率。因此，让我们创建一个低通滤波器，其抽取值为2，采样率为<strong>2.5e6</strong>，截止频率为<strong>symbol_rate * 2</strong>（即<strong>587766</strong>），过渡宽度为<strong>50e3</strong>。</p>
+<p><img src="/images/LP.png" alt=""></p>
+<p>在这一步之后采样率将变为<strong>1.25e6</strong></p>
+<h2 id="自动增益控制以及根余弦滤波器"><a href="#自动增益控制以及根余弦滤波器" class="headerlink" title="自动增益控制以及根余弦滤波器"></a><a href="#自动增益控制以及根余弦滤波器" title="自动增益控制以及根余弦滤波器"></a>自动增益控制以及根余弦滤波器</h2><p>为了获得更好的性能，无论输入信号如何，我们都应将信号保持在恒定水平。为此，我们将使用自动增益控制，它将执行软件增益（基本上只是将信号以乘法的方式放大），不会改变分辨率（因此它不会输出更好的信号），但能够保持我们的电平不变。我们可以使用<strong>GNU Radio</strong>的<strong>AGC</strong>模块。</p>
+<p><img src="/images/AGC.png" alt=""></p>
+<p>速率为<strong>10e-3</strong>，参考值为<strong>0.5</strong>，增益为<strong>0.5</strong>，最大增益为<strong>4000</strong>。</p>
+<p>另一步是<strong>RRC</strong>滤波器（根余弦滤波器）。这是针对<strong>nPSK</strong>调制优化的滤波器，并将其用作符号率的参数。滤波器不是很难生成（它是一个具有一些特定<strong>Taps</strong>的<strong>FIR</strong>），但幸运的是<strong>GNU Radio</strong>为我们提供了一个模块。</p>
+<p><img src="/images/RRC.png" alt=""><br><em>RRC filter</em></p>
+<p>对于<strong>RRC滤波器</strong>的参数，我们将使用<strong>1.25e6</strong>的采样率，符号率<strong>293883</strong>，<strong>Alpha=0.5，Num Taps=361。Alpha</strong>和符号率取自<strong>LRIT</strong>的参数。<strong>Taps</strong>的取值可以自由尝试，但我发现取<strong>361</strong>时能达到质量与性能之间的良好平衡。在滤波之后，我们应该能得到只包含<strong>BPSK</strong>调制信号（或同一频段的噪声）的信号。然后我们可以进入同步和时钟恢复的步骤。</p>
+<h2 id="同步与时钟恢复"><a href="#同步与时钟恢复" class="headerlink" title="同步与时钟恢复"></a><a href="#同步与时钟恢复" title="同步与时钟恢复"></a>同步与时钟恢复</h2><p>正如我之前所说，我们将使用<strong>二阶Costas循环</strong>作为载波恢复（同步）和<strong>M＆M时钟恢复算法</strong>来恢复符号时钟。 <strong>GNU Radio</strong>为这两种算法都提供了对应的模块。让我们从<strong>Costas Loop</strong>开始吧。</p>
+<p><img src="/images/COSTASLOOP.png" alt=""></p>
+<p><em>Costas Loop</em></p>
+<p>对于<strong>Costas loop</strong>的参数，我们只需要设置循环带宽为<strong>0.00199</strong>，阶数为<strong>2</strong>。之后我们应该在基带中拥有我们的虚拟载波。现在我们只需要使用<strong>M＆M时钟恢复算法</strong>将我们的样本与时钟同步。</p>
+<p><img src="/images/MM.png" alt=""></p>
+<p><em>M&amp;M Clock Recovery</em></p>
+<p>对于<strong>M＆M算法</strong>的参数，我们将<strong>Omega</strong>取<strong>4.25339</strong>，这基本上是每个采样率上传输的符号数量，或<strong>sample_rate / symbol_rate</strong>。这是对<strong>M＆M算法</strong>的第一个象征性猜测。对于<strong>Gain Omega</strong>，我们使用<strong>（alpha ^ 2）/ 4</strong>，即<strong>alpha = 3.7e-3</strong>，所以我们的<strong>增益Omega</strong>为<strong>3.4225e-6</strong>，Mu为0.5，<strong>增益Mu</strong>为<strong>alpha</strong>（或<strong>3.7e-3</strong>），<strong>Omega Relative</strong>限制为<strong>5e-3</strong>。</p>
+<p>所以你可以注意到我在<strong>M＆M算法</strong>中调用了一个新的参数<strong>alpha</strong>，它不是模块的直接参数。该<strong>alpha</strong>是一个参数，用于调整M＆M时钟恢复算法偏离初始猜测的程度。你可以尝试使用自己的值，但<strong>3.7e-3</strong>对我来说是最好的选择。</p>
+<p>现在，在<strong>M＆M</strong>的输出中，我们将以正确的速率抽出复符号。现在我们只需要提取其中的数值。</p>
+<h2 id="从GNU-Radio输出符号"><a href="#从GNU-Radio输出符号" class="headerlink" title="从GNU Radio输出符号"></a><a href="#从GNU-Radio输出符号" title="从GNU Radio输出符号"></a>从GNU Radio输出符号</h2><p>所以我们现在可以直接将所得到的信号映射得到二进制数据，但由于我将在文章的下一部分中解释的原因，我将保持符号不变，仅把他们转换为字节。所以基本上我们<strong>GNU Radio</strong>的输出将是一个有符号的字节，范围-128到127之间变化，-128为100％几率为0，127为100％有机会为1位。中间值为相应的机会。基本上我将有一个字节代表一个位为0或1的概率。我将在本文的下一部分解释更多。</p>
+<p>现在我们需要做的是从M＆M模块获取Complex输出，只获得<strong>Real Part</strong>（_Component I_）转换为<strong>byte</strong>并输出（输出至文件或<strong>TCP</strong>管道）。</p>
+<p><img src="/images/TCP.png" alt=""></p>
+<p>这是一个使用两个模块的简单操作。首先，我们使用Complex to Real块，它将使用复数的<strong>Real</strong>组件输出<strong>Float</strong>，然后转换为<strong>char</strong>乘以127（因为<strong>Complex</strong>已标准化）。之后，我们可以使用<strong>File Sink</strong>输出到文件或创建矢量流以输出到<strong>TCP Socket</strong>。我将使用<strong>TCP</strong>套接字。</p>
+<p><img src="/images/SOCKET.png" alt=""></p>
+<p>在通过<strong>TCP</strong>发送之前，<strong>Stream to Vector</strong>只聚合每16个字节。这将减少<strong>TCP</strong>数据包开销。 <strong>TCP Sink</strong>参数为：</p>
+<ul>
+<li>输入类型：<strong>字节</strong></li>
+<li>地址：<strong>127.0.0.1</strong></li>
+<li>端口：<strong>5000</strong></li>
+<li>模式：<strong>客户端</strong></li>
+<li>长度：<strong>16</strong></li>
+</ul>
+<p>使用此参数，当我们运行<strong>GRC流程</strong>时，它将尝试通过端口5000连接到<strong>localhost</strong>，并通过<strong>TCP</strong>发送每组<strong>16</strong>个字节（或者你也可以选择发送符号）。本文的下一部分将讨论解码此问题的软件部分，并生成用于创建输出文件的数据包。您可以在下面查看我的最终流程图。它还有一些其他块可以更灵活地更改参数，还可以显示输入信号的瀑布/fft图以及星座图。</p>
+<p><img src="/images/FINAL.png" alt=""></p>
+<p><em>GRC源文件<a href="https://github.com/racerxdl/open-satellite-project/blob/master/GOES/demodulator/demod_tcp_qt.grc" target="_blank" rel="noopener">下载地址</a></em></p>
+</div><div class="post-footer"><div class="meta"><div class="info"><i class="fa fa-sun-o"></i><span class="date">2018-11-03</span><i class="fa fa-tag"></i></div></div></div></div><div class="share"><div class="evernote"><a class="fa fa-bookmark" href="javascript:(function(){EN_CLIP_HOST='http://www.evernote.com';try{var%20x=document.createElement('SCRIPT');x.type='text/javascript';x.src=EN_CLIP_HOST+'/public/bookmarkClipper.js?'+(new%20Date().getTime()/100000);document.getElementsByTagName('head')[0].appendChild(x);}catch(e){location.href=EN_CLIP_HOST+'/clip.action?url='+encodeURIComponent(location.href)+'&amp;title='+encodeURIComponent(document.title);}})();" ref="nofollow" target="_blank"></a></div><div class="weibo"><a class="fa fa-weibo" href="javascript:void((function(s,d,e){try{}catch(e){}var f='http://service.weibo.com/share/share.php?',u=d.location.href,p=['url=',e(u),'&amp;title=',e(d.title),'&amp;appkey=2924220432'].join('');function a(){if(!window.open([f,p].join(''),'mb',['toolbar=0,status=0,resizable=1,width=620,height=450,left=',(s.width-620)/2,',top=',(s.height-450)/2].join('')))u.href=[f,p].join('');};if(/Firefox/.test(navigator.userAgent)){setTimeout(a,0)}else{a()}})(screen,document,encodeURIComponent));"></a></div><div class="twitter"><a class="fa fa-twitter" href="http://twitter.com/home?status=,http://jimizhou.xyz/GOES-Satellite.html,Jimi' target="_blank" rel="noopener"s Blog,GOES卫星信号解调-GNUradio,;"></a></div></div><div class="pagination"><ul class="clearfix"><li class="pre pagbuttons"><a class="btn" role="navigation" href="/%E6%AF%94Airdrop%E8%BF%98%E5%A5%BD%E7%94%A8%E7%9A%84%E7%A5%9E%E5%99%A8-Snapdrop.html" title="比Airdrop还好用的跨平台神器-Snapdrop">上一篇</a></li><li class="next pagbuttons"><a class="btn" role="navigation" href="/Pong-Game.html" title="Pong Game on Zybo">下一篇</a></li></ul></div></div></div></div></div><script src="/js/jquery.js"></script><script src="/js/jquery-migrate-1.2.1.min.js"></script><script src="/js/jquery.appear.js"></script></body></html>
