@@ -398,28 +398,6 @@
   </entry>
   
   <entry>
-    <title>SMERGY Smart Pedal</title>
-    <link href="http://jimizhou.xyz/SMERGY.html"/>
-    <id>http://jimizhou.xyz/SMERGY.html</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2020-02-07T04:54:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. <strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>.  </p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><a href="#Introduction" title="Introduction"></a>Introduction</h2><p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T.</p><p><strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>. The goal is to raise awareness amongst people on what energy is, what is required to generate it and what they can actually do with this energy.</p><h2 id="Features"><a href="#Features" class="headerlink" title="Features:"></a><a href="#Features" title="Features:"></a>Features:</h2><ul><li>Powered by Arduino Nano.</li><li>Cycling cadence measurement.</li><li>Power measurement in both Red and Blue pedal.</li><li>Bluetooth interface with Android application.</li><li>Race between Red and Blue pedal.</li><li>Energy calculation and conversion of equivalent time to power certain device.<br>Event based leaderboard, local offline database.</li></ul><p><a href="https://github.com/JimiZhou/SMERGY-Smart-Pedal" target="_blank" rel="noopener">Github Repository</a> of SMERGY Application:</p><p>2018, Leuven, Belgium</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. &lt;strong&gt;SMERGY&lt;/strong&gt; stands f
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>Roadtrip-Iceland-2017</title>
     <link href="http://jimizhou.xyz/Roadtrip-Iceland-2017.html"/>
     <id>http://jimizhou.xyz/Roadtrip-Iceland-2017.html</id>
@@ -435,6 +413,28 @@
         &lt;p&gt;Iceland Roadtrip 2017&lt;/p&gt;
 &lt;p&gt;Shoot with DJI Mavic Pro &amp;amp; iPhone 6s&lt;/p&gt;
 &lt;h2 id=&quot;Where-is-Iceland&quot;&gt;&lt;a href=&quot;#Where-is-Iceland&quot; class=&quot;he
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>SMERGY Smart Pedal</title>
+    <link href="http://jimizhou.xyz/SMERGY.html"/>
+    <id>http://jimizhou.xyz/SMERGY.html</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. <strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>.  </p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><a href="#Introduction" title="Introduction"></a>Introduction</h2><p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T.</p><p><strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>. The goal is to raise awareness amongst people on what energy is, what is required to generate it and what they can actually do with this energy.</p><h2 id="Features"><a href="#Features" class="headerlink" title="Features:"></a><a href="#Features" title="Features:"></a>Features:</h2><ul><li>Powered by Arduino Nano.</li><li>Cycling cadence measurement.</li><li>Power measurement in both Red and Blue pedal.</li><li>Bluetooth interface with Android application.</li><li>Race between Red and Blue pedal.</li><li>Energy calculation and conversion of equivalent time to power certain device.<br>Event based leaderboard, local offline database.</li></ul><p><a href="https://github.com/JimiZhou/SMERGY-Smart-Pedal" target="_blank" rel="noopener">Github Repository</a> of SMERGY Application:</p><p>2018, Leuven, Belgium</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. &lt;strong&gt;SMERGY&lt;/strong&gt; stands f
       
     
     </summary>
