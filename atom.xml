@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://jimizhou.xyz/"/>
-  <updated>2020-04-21T05:42:20.185Z</updated>
+  <updated>2020-04-23T07:30:43.576Z</updated>
   <id>http://jimizhou.xyz/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CentOS 7.6无法引导</title>
+    <link href="http://jimizhou.xyz/CentOS-7-6%E6%97%A0%E6%B3%95%E5%BC%95%E5%AF%BC.html"/>
+    <id>http://jimizhou.xyz/CentOS-7-6%E6%97%A0%E6%B3%95%E5%BC%95%E5%AF%BC.html</id>
+    <published>2020-04-23T07:30:41.000Z</published>
+    <updated>2020-04-23T07:30:43.576Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>CentOS 7.6，yum update更新系统后，开机提示找不到grubx64.efi，报错如下图</p><p><img src="https://i.loli.net/2020/04/23/8EtFJLDnMlp2QBV.png" alt="efi.png"></p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>使用Live系统或其他Linux系统挂载原系统的/boot分区，进入EFI/BOOT/下找到grubx64.efi，拷贝到EFT/centos/下，重启顺利进入系统</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;CentOS 7.6，yum update更新系统后，开机提示找不到grubx64.efi，报错如下图&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;h
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Note" scheme="http://jimizhou.xyz/tags/Note/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CentOS 7.6安装Teamviewer踩坑</title>
+    <link href="http://jimizhou.xyz/CentOS-7-6%E5%AE%89%E8%A3%85Teamviewer%E8%B8%A9%E5%9D%91.html"/>
+    <id>http://jimizhou.xyz/CentOS-7-6%E5%AE%89%E8%A3%85Teamviewer%E8%B8%A9%E5%9D%91.html</id>
+    <published>2020-04-23T03:29:55.000Z</published>
+    <updated>2020-04-23T03:29:55.099Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>CentOS 7.6，最小化安装，无图形界面，尝试安装Teamviewer</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root@linux]#</span><span class="bash"> yum install ./teamviewer_15.4.4445.x86_64.rpm</span></span><br></pre></td></tr></table></figure><p>报错：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Error: Package: qt5-qtwebkit-5.9.1-2.el7.x86_64 (epel)</span><br><span class="line">Requires: qt5-qtbase(x86-64) = 5.9.7</span><br><span class="line">Installing: qt5-qtbase-5.9.2-3.el7.x86_64 (base)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.2-3.el7</span><br><span class="line">Error: Package: qt5-qtwebkit-5.9.1-2.el7.x86_64 (epel)</span><br><span class="line">Requires: qt5-qtdeclarative(x86-64) = 5.9.7</span><br><span class="line">Installing: qt5-qtdeclarative-5.9.2-1.el7.x86_64 (base)</span><br><span class="line">qt5-qtdeclarative(x86-64) = 5.9.2-1.el7</span><br><span class="line">You could try using --skip-broken to work around the problem</span><br><span class="line">You could try running: rpm -Va --nofiles --nodigest</span><br></pre></td></tr></table></figure><p>下载缺失的QT5软件包：<br><img src="https://i.loli.net/2020/04/23/alpd6TseuZzm9M8.png" alt="qt"><br>出现更多的报错：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">Error: Package: qt5-qtlocation-5.9.2-1.el7.x86_64 (base)</span><br><span class="line">Requires: qt5-qtbase(x86-64) = 5.9.2</span><br><span class="line">Removing: qt5-qtbase-5.9.2-3.el7.x86_64 (@base)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.2-3.el7</span><br><span class="line">Updated By: qt5-qtbase-5.9.7-2.el7.x86_64 (/qt5-qtbase-5.9.7-2.el7.x86_64)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.7-2.el7</span><br><span class="line">Error: Package: qt5-qtx11extras-5.9.2-1.el7.x86_64 (base)</span><br><span class="line">Requires: qt5-qtbase(x86-64) = 5.9.2</span><br><span class="line">Removing: qt5-qtbase-5.9.2-3.el7.x86_64 (@base)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.2-3.el7</span><br><span class="line">Updated By: qt5-qtbase-5.9.7-2.el7.x86_64 (/qt5-qtbase-5.9.7-2.el7.x86_64)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.7-2.el7</span><br><span class="line">Error: Package: qt5-qtxmlpatterns-5.9.2-1.el7.x86_64 (base)</span><br><span class="line">Requires: qt5-qtbase(x86-64) = 5.9.2</span><br><span class="line">Removing: qt5-qtbase-5.9.2-3.el7.x86_64 (@base)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.2-3.el7</span><br><span class="line">Updated By: qt5-qtbase-5.9.7-2.el7.x86_64 (/qt5-qtbase-5.9.7-2.el7.x86_64)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.7-2.el7</span><br><span class="line">Error: Package: qt5-qtsensors-5.9.2-1.el7.x86_64 (base)</span><br><span class="line">Requires: qt5-qtbase(x86-64) = 5.9.2</span><br><span class="line">Removing: qt5-qtbase-5.9.2-3.el7.x86_64 (@base)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.2-3.el7</span><br><span class="line">Updated By: qt5-qtbase-5.9.7-2.el7.x86_64 (/qt5-qtbase-5.9.7-2.el7.x86_64)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.7-2.el7</span><br><span class="line">Error: Package: qt5-qtbase-gui-5.9.2-3.el7.x86_64 (@base)</span><br><span class="line">Requires: qt5-qtbase(x86-64) = 5.9.2-3.el7</span><br><span class="line">Removing: qt5-qtbase-5.9.2-3.el7.x86_64 (@base)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.2-3.el7</span><br><span class="line">Updated By: qt5-qtbase-5.9.7-2.el7.x86_64 (/qt5-qtbase-5.9.7-2.el7.x86_64)</span><br><span class="line">qt5-qtbase(x86-64) = 5.9.7-2.el7</span><br><span class="line">You could try using --skip-broken to work around the problem</span><br><span class="line">You could try running: rpm -Va --nofiles --nodigest</span><br></pre></td></tr></table></figure><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>使用CR源（<a href="https://wiki.centos.org/zh/AdditionalResources/Repositories/CR" target="_blank" rel="noopener">持续发行软件库</a>）安装可解决QT软件包依赖问题。</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root@linux]#</span><span class="bash"> yum --enablerepo=cr install ./teamviewer-host_15.4.4445.x86_64.rpm</span></span><br></pre></td></tr></table></figure><p>安装成功后查看TV信息：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root@linux]#</span><span class="bash"> /opt/teamviewer/tv_bin/teamviewer --info</span></span><br></pre></td></tr></table></figure><p>返回状态：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">TeamViewer                           15.4.4445  (RPM)</span><br><span class="line">TeamViewer ID:                        18*****695</span><br><span class="line">teamviewerd status                   ● teamviewerd.service - TeamViewer remote control daemon</span><br><span class="line">Loaded: loaded (/etc/systemd/system/teamviewerd.service; enabled; vendor preset: disabled)</span><br><span class="line">Active: active (running) since Thu 2020-04-23 10:55:23 CST; 2min 28s ago</span><br><span class="line">Process: 141719 ExecStart=/opt/teamviewer/tv_bin/teamviewerd -d (code=exited, status=0/SUCCESS)</span><br><span class="line">CGroup: /system.slice/teamviewerd.service</span><br><span class="line">└─141721 /opt/teamviewer/tv_bin/teamviewerd -d</span><br><span class="line">Apr 23 10:55:23 compute-for-intel-1 systemd[1]: Starting TeamViewer remote control daemon...</span><br><span class="line">Apr 23 10:55:23 compute-for-intel-1 systemd[1]: Can't open PID file /var/run/teamviewerd.pid (yet?) after start: No such file or directory</span><br><span class="line">Apr 23 10:55:23 compute-for-intel-1 systemd[1]: Started TeamViewer remote control daemon.</span><br></pre></td></tr></table></figure><p>设置密码：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[root@linux]#</span><span class="bash"> teamviewer --passwd abcdefg</span></span><br><span class="line"></span><br><span class="line">ok</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h2&gt;&lt;p&gt;CentOS 7.6，最小化安装，无图形界面，尝试安装Teamviewer&lt;/p&gt;
+&lt;figure class=&quot;highlight she
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Note" scheme="http://jimizhou.xyz/tags/Note/"/>
+    
+  </entry>
   
   <entry>
     <title>10G万兆以太网</title>
@@ -348,6 +398,28 @@
   </entry>
   
   <entry>
+    <title>SMERGY Smart Pedal</title>
+    <link href="http://jimizhou.xyz/SMERGY.html"/>
+    <id>http://jimizhou.xyz/SMERGY.html</id>
+    <published>2018-10-08T16:00:00.000Z</published>
+    <updated>2020-02-07T04:54:50.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. <strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>.  </p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><a href="#Introduction" title="Introduction"></a>Introduction</h2><p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T.</p><p><strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>. The goal is to raise awareness amongst people on what energy is, what is required to generate it and what they can actually do with this energy.</p><h2 id="Features"><a href="#Features" class="headerlink" title="Features:"></a><a href="#Features" title="Features:"></a>Features:</h2><ul><li>Powered by Arduino Nano.</li><li>Cycling cadence measurement.</li><li>Power measurement in both Red and Blue pedal.</li><li>Bluetooth interface with Android application.</li><li>Race between Red and Blue pedal.</li><li>Energy calculation and conversion of equivalent time to power certain device.<br>Event based leaderboard, local offline database.</li></ul><p><a href="https://github.com/JimiZhou/SMERGY-Smart-Pedal" target="_blank" rel="noopener">Github Repository</a> of SMERGY Application:</p><p>2018, Leuven, Belgium</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. &lt;strong&gt;SMERGY&lt;/strong&gt; stands f
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>Roadtrip-Iceland-2017</title>
     <link href="http://jimizhou.xyz/Roadtrip-Iceland-2017.html"/>
     <id>http://jimizhou.xyz/Roadtrip-Iceland-2017.html</id>
@@ -363,28 +435,6 @@
         &lt;p&gt;Iceland Roadtrip 2017&lt;/p&gt;
 &lt;p&gt;Shoot with DJI Mavic Pro &amp;amp; iPhone 6s&lt;/p&gt;
 &lt;h2 id=&quot;Where-is-Iceland&quot;&gt;&lt;a href=&quot;#Where-is-Iceland&quot; class=&quot;he
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>SMERGY Smart Pedal</title>
-    <link href="http://jimizhou.xyz/SMERGY.html"/>
-    <id>http://jimizhou.xyz/SMERGY.html</id>
-    <published>2018-10-08T16:00:00.000Z</published>
-    <updated>2020-02-07T04:54:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. <strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>.  </p><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a><a href="#Introduction" title="Introduction"></a>Introduction</h2><p>This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T.</p><p><strong>SMERGY</strong> stands for <strong>SM</strong>art <strong>E</strong>ne<strong>RGY</strong>. The goal is to raise awareness amongst people on what energy is, what is required to generate it and what they can actually do with this energy.</p><h2 id="Features"><a href="#Features" class="headerlink" title="Features:"></a><a href="#Features" title="Features:"></a>Features:</h2><ul><li>Powered by Arduino Nano.</li><li>Cycling cadence measurement.</li><li>Power measurement in both Red and Blue pedal.</li><li>Bluetooth interface with Android application.</li><li>Race between Red and Blue pedal.</li><li>Energy calculation and conversion of equivalent time to power certain device.<br>Event based leaderboard, local offline database.</li></ul><p><a href="https://github.com/JimiZhou/SMERGY-Smart-Pedal" target="_blank" rel="noopener">Github Repository</a> of SMERGY Application:</p><p>2018, Leuven, Belgium</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;This is a project during my third bachelor year of Electronics Engineering in KU Leuven, Campus Group T. &lt;strong&gt;SMERGY&lt;/strong&gt; stands f
       
     
     </summary>
